@@ -1,0 +1,25 @@
+INTRODUCTION
+The urSign client stuff.
+
+RUNNING
+The main entry-point to the app is in App.java.
+
+This is a Maven project, a module which comes through Eclipse by default.
+Maven is used to manage the following dependencies currently:
+* Apache HTTP Client
+
+See pom.xml for details.
+
+TODO
+* Contents of LoginForm needs to be transferred into LoginDialog.
+  JDialog has been used due to its modality, so App.main() won't
+  continue unless we have passed the LoginDialog somehow.
+* Server comms needs to be added to login functions, and cookie
+  tracking to ensure that no server-side data is compromised.
+* Tests for user (failing tests, a la Agile/TDD) need to be made
+  by testing team. Also add dummy methods for collections/user
+  for testing purposes. AllTests suite should be used + JUnit.
+* Comment User code.
+  
+CHANGELOG
+* See the git commit log for information on individual contributions.

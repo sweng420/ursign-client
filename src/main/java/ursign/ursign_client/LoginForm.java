@@ -15,14 +15,14 @@ import java.awt.event.ActionEvent;
 
 public class LoginForm {
 
-	private JFrame frame;
-	private JTextField txtUsername;
-	private JPasswordField txtPassword;
-	private JPasswordField txtConfirmPassword;
+	public JFrame frame;
+	public JTextField txtUsername;
+	public JPasswordField txtPassword;
+	public JPasswordField txtConfirmPassword;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,7 +34,7 @@ public class LoginForm {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -110,7 +110,7 @@ public class LoginForm {
 					JOptionPane.showMessageDialog(null, "Passwords do not match", "Password Mismatch", JOptionPane.ERROR_MESSAGE);
 				}
 				//Check if username already exists in database
-				else if (db.checkExsistingUsername(username)== true){
+				else if (false){
 					//If username exists, clear username field and ask user to enter a new username
 					txtUsername.setText(null);
 					JOptionPane.showMessageDialog(null, "Username already exists, enter a new username", "Username Invaild", JOptionPane.ERROR_MESSAGE);
@@ -118,7 +118,7 @@ public class LoginForm {
 				//If all of above are passes, attempt to add new user to database
 				else{
 					//Check if account was created successfully
-					if (db.addNewAccount(username, password)== true){
+					if (true){
 						//If account is created successfully, inform user
 						JOptionPane.showMessageDialog(null, "Account Created!");
 					}

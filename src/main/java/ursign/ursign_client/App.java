@@ -1,6 +1,9 @@
 package ursign.ursign_client;
 
+import java.awt.EventQueue;
 import java.io.IOException;
+
+import javax.swing.JDialog;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,31 +20,27 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-
-/**
- * Hello world!
- *
- */
 public class App 
 {
-	public static User login(String usernameOrEmail, String password) throws UserException {
-		throw new UserException("bad-login");
-	}
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-        try {
-        	User myUser = login("iyra", "test");
-        } catch (UserException e) {
-        	System.out.println(e.toString());
-        }
-        // The underlying HTTP connection is still held by the response object
-        // to allow the response content to be streamed directly from the network socket.
-        // In order to ensure correct deallocation of system resources
-        // the user MUST call CloseableHttpResponse#close() from a finally clause.
-        // Please note that if response content is not fully consumed the underlying
-        // connection cannot be safely re-used and will be shut down and discarded
-        // by the connection manager. 
+    	User u = new User();
+
+    	try {
+			LoginDialog dialog = new LoginDialog(u);
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	if(!u.loggedIn()){
+    		System.out.println( "Sorry!" );
+    		return;
+    	}
+    	System.out.print("Welcome!");
+    	/* put here what you want to do when the login worked */
+        
         
     }
 }
