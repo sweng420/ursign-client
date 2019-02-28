@@ -29,7 +29,6 @@ public class CollectionParser {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                Element eElement = (Element) nNode;
 
-               
                NodeList mList = doc.getElementsByTagName("multimedia");
                System.out.println("----------------------------");
                
@@ -49,9 +48,7 @@ public class CollectionParser {
 	                          .item(0)
 	                          .getTextContent());
                   }
-                  
                }
-               
             }
          }
       } catch (Exception e) {
@@ -59,3 +56,4 @@ public class CollectionParser {
       }
    }
 }
+//https://www.tutorialspoint.com/java_xml/java_dom_parse_document.htm
