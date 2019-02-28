@@ -40,7 +40,10 @@ public class App
     	}
     	System.out.print("Welcome!");
     	/* put here what you want to do when the login worked */
-        
+    	
+    	CollectionParser parser = new CollectionParser();
+    	parser.parse("colours2.xml");
+    System.out.println(parser.getPresentation());
         
     }
 }

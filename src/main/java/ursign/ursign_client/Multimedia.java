@@ -12,6 +12,7 @@ public class Multimedia {
 	public String getType(){
 		return type;
 	}
+	
 	public String getFilelocation(){
 		return filelocation;
 	}
@@ -22,7 +23,9 @@ public class Multimedia {
 	public void setFilelocation(String filelocation){
 		this.filelocation=filelocation;
 	}
-
+	public String toString() {
+		return type+" "+filelocation;
+	}
 	
 }
 	
