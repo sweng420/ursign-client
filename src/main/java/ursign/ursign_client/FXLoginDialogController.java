@@ -3,6 +3,7 @@ package ursign.ursign_client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
@@ -102,7 +103,7 @@ public class FXLoginDialogController {
 
 				err = jsonObject.get("error").getAsString();
 				
-				if(err==""){
+				if(err.equals("")){
 					setCookies(response.getFirstHeader("Set-Cookie") == null ? "" : 
 	                    response.getFirstHeader("Set-Cookie").toString());
 					
@@ -113,6 +114,12 @@ public class FXLoginDialogController {
 					u.setUsername(uname);
 					u.setUid(1);
 					
+					Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXLoginDialog.fxml"));
+					Stage stage = new Stage();
+					stage.setTitle("xyz");
+					stage.setScene(new Scene(root,1000,500));
+					stage.show();
+					((Node)(event.getSource())).getScene().getWindow().hide();
 				} else {
 					actiontarget.setText(messageMap.get(err));
 				}
