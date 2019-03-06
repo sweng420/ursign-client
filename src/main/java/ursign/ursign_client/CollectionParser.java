@@ -38,31 +38,42 @@ public class CollectionParser {
          
          NodeList nList = doc.getElementsByTagName("page");
          System.out.println("----------------------------");
-         
+         Page p = new Page();
          for (int temp = 0; temp < nList.getLength(); temp++) {
             Node nNode = nList.item(temp);
             System.out.println("\nCurrent Element :" + nNode.getNodeName());
-            
+            System.out.println("new page" + nList.getLength());
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                Element eElement = (Element) nNode;
 
-               NodeList mList = doc.getElementsByTagName("multimedia");
+               NodeList mList = eElement.getElementsByTagName("multimedia");
                System.out.println("----------------------------");
-               Page p = new Page();
-         //MULTIMEDIA
-     
-               for (temp = 0; temp < mList.getLength(); temp++) {
-                  Node mNode = mList.item(temp);
-                  System.out.println("\nCurrent Element :" + mNode.getNodeName());
-                  if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                      Element mElement = (Element) mNode;
-	                  p.addMultimedia(new Multimedia(
-	                		  mElement.getElementsByTagName("type").item(0).getTextContent(),
-	                		  mElement.getElementsByTagName("filelocation").item(0).getTextContent()));  
-	                  
-	        
+               p = null;
+               p = new Page();
+               
+               //MULTIMEDIA
+               System.out.println("mlist length::"+mList.getLength());
+               for (int m_temp = 0; m_temp < mList.getLength(); m_temp++) {
+                  Node mNode = mList.item(m_temp);
+                  if(mNode != null) {
+	                  if (mNode.getNodeType() == Node.ELEMENT_NODE) {
+	                      Element mElement = (Element) mNode;
+	                      Node styleNode = mElement.getElementsByTagName("style").item(0);
+	                      String styleString;
+	                      if(styleNode == null) {
+	                    	  styleString = "";
+	                      } else {
+	                    	  styleString = styleNode.getTextContent();
+	                      }
+		                  p.addMultimedia(new Multimedia(
+		                		  mElement.getElementsByTagName("type").item(0).getTextContent(),
+		                		  mElement.getElementsByTagName("filelocation").item(0).getTextContent(),
+		                		  styleString
+		                		  ));
+	                  }
                   }
                }
+
                System.out.println(p);
                presentation.addPage(p);
             }

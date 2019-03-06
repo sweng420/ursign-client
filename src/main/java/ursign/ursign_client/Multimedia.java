@@ -3,10 +3,12 @@ package ursign.ursign_client;
 public class Multimedia {
 	private String type;
 	private String filelocation;
+	private String style;
 	
-	Multimedia(String type, String filelocation){
+	Multimedia(String type, String filelocation, String style){
 		this.type=type;
 		this.filelocation=filelocation;
+		this.style = style;
 	}
 	
 	public String getType(){
@@ -24,7 +26,7 @@ public class Multimedia {
 		this.filelocation=filelocation;
 	}
 	public String toString() {
-		return type+" "+filelocation;
+		return "Type: "+type+"\nLocation:"+filelocation+"\nStyle:"+style;
 	}
 	
 }

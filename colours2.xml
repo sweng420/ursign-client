@@ -24,12 +24,8 @@
 		</multimedia>
     
 		<multimedia>
-			<type>
-				Text
-			</type>
-			<filelocation>
-				green
-			</filelocation>
+			<type>Text</type>
+			<filelocation>green</filelocation>
 			<meta>
 			</meta>
 		</multimedia>
@@ -37,25 +33,25 @@
   
   	<page>  <!--blue-->
 		<multimedia>
-			<type>
-				Image
-			</type>
-			<filelocation>
-				Colours_media/blue.png
-			</filelocation>
+			<type>Image</type>
+			<filelocation>Colours_media/blue.png</filelocation>
 			<meta>
+				<duration></duration>
 			</meta>
 		</multimedia>
     
 		<multimedia>
-			<type>
-				Text
-			</type>
-			<filelocation>
-				blue
-			</filelocation>
+			<type>Text</type>
+			<filelocation>blue</filelocation>
+			
 			<meta>
+				<style>-fx-text-fill: green; -fx-font-size: 16px;</style>
 			</meta>
+		</multimedia>
+		
+		<multimedia>
+		<type>Graphic</type>
+		<filelocation>square</filelocation>
 		</multimedia>
   </page>
 </id>
