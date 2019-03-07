@@ -114,11 +114,24 @@ public class FXLoginDialogController {
 					u.setUsername(uname);
 					u.setUid(1);
 					
-					Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXLoginDialog.fxml"));
+					/*Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXHomePage.fxml"));
 					Stage stage = new Stage();
 					stage.setTitle("xyz");
 					stage.setScene(new Scene(root,1000,500));
-					stage.show();
+					stage.show();*/
+					
+					Stage stage = new Stage();
+					stage.setTitle("xyz");
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
+
+					Parent root = (Parent)fxmlLoader.load();          
+					FXHomePageController controller = fxmlLoader.<FXHomePageController>getController();
+					controller.setUser(u);
+					Scene scene = new Scene(root, 1000, 500); 
+
+					stage.setScene(scene);    
+
+					stage.show();   
 					((Node)(event.getSource())).getScene().getWindow().hide();
 				} else {
 					actiontarget.setText(messageMap.get(err));
