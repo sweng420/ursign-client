@@ -21,8 +21,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class Web {
-	public WebRequest makeRequest(List<BasicNameValuePair> parameters) throws Exception {
-		String url = "http://erostratus.net:5000/login";
+	public WebRequest makeRequest(String url, List<BasicNameValuePair> parameters) throws Exception {
 		String err;
 		CookieHandler.setDefault(new CookieManager());
 		HttpClient client = HttpClientBuilder.create().build();
@@ -66,7 +65,7 @@ public class Web {
 		
 					err = jsonObject.get("error").getAsString();
 					
-					return new WebRequest(err, result.toString());
+					return new WebRequest(err, jsonObject);
 		    	} catch (Exception e) {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();

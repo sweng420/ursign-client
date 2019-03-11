@@ -14,7 +14,7 @@ public class App extends Application
 	
 	@Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXLoginDialog.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXSplash.fxml"));
     
         Scene scene = new Scene(root, 300, 275);
     
@@ -40,11 +40,8 @@ public class App extends Application
     		//return;
     	}
     	System.out.print("Welcome!");
-    	
-    	
-    	
-    	 
-    	 System.out.println(javafx.scene.text.Font.getFamilies());
+
+    	System.out.println(javafx.scene.text.Font.getFamilies());
 	}
 	
     /*public static void main( String[] args )

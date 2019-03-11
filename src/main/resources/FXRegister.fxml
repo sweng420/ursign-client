@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.*?>
+<?import java.lang.String?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ursign.ursign_client.FXRegisterController">
+    <bottom>
+        <VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
+            <children>
+                <Separator prefWidth="200.0" />
+                <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0">
+                    <children>
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="75.0" text="Back" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                        </Button>
+                        <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="25.0" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="250.0" text="GALLERY" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Button>
+                        <Separator orientation="VERTICAL" prefHeight="25.0" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="250.0" text="QUIZ HOME" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                        </Button>
+                        <Separator orientation="VERTICAL" prefHeight="25.0" />
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="75.0" text="Profile" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="20.0" />
+            </padding>
+        </VBox>
+    </bottom>
+    <top>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets top="60.0" />
+            </BorderPane.margin>
+            <children>
+                <Label fx:id="title" text="REGISTER">
+                    <font>
+                        <Font name="Calibri" size="30.0" />
+                    </font>
+                </Label>
+                <Separator prefWidth="200.0" />
+            </children>
+        </VBox>
+    </top>
+   <left>
+      <AnchorPane maxWidth="400.0" minWidth="200.0" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT" layoutX="70.0" layoutY="58.0" maxWidth="400.0" minWidth="200.0" prefWidth="280.0" spacing="5.0">
+               <children>
+                  <Label text="Username">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField />
+                  <Label text="Password">
+                     <VBox.margin>
+                        <Insets left="5.0" top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <PasswordField />
+                  <Label text="Confirm Password">
+                     <VBox.margin>
+                        <Insets left="5.0" top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <PasswordField />
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@pics/iconUrSignV1.2.jpg"/>
+                            </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" text="Register" onAction="#handleRegister">
+                           <font>
+                              <Font name="Calibri" size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="100.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane maxWidth="400.0" minWidth="200.0" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER_LEFT" layoutX="60.0" layoutY="55.0" maxWidth="400.0" minWidth="200.0" prefWidth="280.0" spacing="5.0">
+               <children>
+                  <Label text="Email">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField />
+                  <Label text="Name">
+                     <VBox.margin>
+                        <Insets left="5.0" top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField />
+                  <Label text="Age">
+                     <VBox.margin>
+                        <Insets left="5.0" top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Spinner min="0" max="100" initialValue="30" editable="true"/>
+                  <Label text="Gender">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox prefWidth="150.0">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Male"/>
+                              <String fx:value="Female"/>
+                              <String fx:value="Hermaphrodite"/>
+                          </FXCollections>
+                      </items>
+                  </ComboBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

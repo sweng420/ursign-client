@@ -1,20 +1,11 @@
 package ursign.ursign_client;
- 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +23,17 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.net.CookieHandler;
-import java.net.CookieManager;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class FXLoginDialogController {
+public class FXSplashController {
 	@FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Text actiontarget;
@@ -49,8 +47,30 @@ public class FXLoginDialogController {
 		put("username-taken", "Username already in use");
 	}};
     
-    @FXML protected void handleSubmitButtonAction(ActionEvent event) {
-        actiontarget.setText("Sign in button pressed");
+	@FXML protected void handleRegisterTransition(ActionEvent event) {
+		Stage stage = (Stage)usernameField.getScene().getWindow();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXRegister.fxml"));     
+
+		Parent root;
+			try {
+				root = (Parent)fxmlLoader.load();
+				FXRegisterController controller = fxmlLoader.<FXRegisterController>getController();
+				//controller.setUser(u);
+				Scene scene = new Scene(root, 1000, 500); 
+
+				stage.setScene(scene);    
+
+				stage.show(); 
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			  
+	}
+	
+	
+    @FXML protected void handleLogin(ActionEvent event) {
+        //actiontarget.setText("Sign in button pressed");
         
         String uname = usernameField.getText();
         String password = passwordField.getText();
@@ -114,25 +134,18 @@ public class FXLoginDialogController {
 					u.setUsername(uname);
 					u.setUid(1);
 					
-					/*Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXHomePage.fxml"));
-					Stage stage = new Stage();
-					stage.setTitle("xyz");
-					stage.setScene(new Scene(root,1000,500));
-					stage.show();*/
-					
-					Stage stage = new Stage();
-					stage.setTitle("xyz");
+					Stage stage = (Stage)usernameField.getScene().getWindow();
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
 
-					Parent root = (Parent)fxmlLoader.load();          
-					FXHomePageController controller = fxmlLoader.<FXHomePageController>getController();
-					controller.setUser(u);
-					Scene scene = new Scene(root, 1000, 500); 
+					Parent root;
+						root = (Parent)fxmlLoader.load();
+						FXHomePageController controller = fxmlLoader.<FXHomePageController>getController();
+						controller.setUser(u);
+						Scene scene = new Scene(root, 1000, 500); 
 
-					stage.setScene(scene);    
+						stage.setScene(scene);    
 
-					stage.show();   
-					((Node)(event.getSource())).getScene().getWindow().hide();
+						stage.show();   
 				} else {
 					actiontarget.setText(messageMap.get(err));
 				}
@@ -163,5 +176,5 @@ public class FXLoginDialogController {
     public void setCookies(String cookies) {
     	this.cookies = cookies;
     }
-
+	
 }
