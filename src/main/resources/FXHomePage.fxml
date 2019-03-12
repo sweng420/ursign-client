@@ -6,17 +6,43 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:controller="ursign.ursign_client.FXHomePageController" 
-    xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-<gridLinesVisible>true</gridLinesVisible>
+<GridPane fx:controller="ursign.ursign_client.FXHomePageController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+	<padding>
+		<Insets top="25" right="25" bottom="10" left="25"/>
+	</padding>
+	
+	<gridLinesVisible>
+		true
+	</gridLinesVisible>
 
-        <HBox spacing="10" alignment="bottom_right" 
-        GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button text="Sign In"     
-        onAction="#handleSubmitButtonAction"/>
-</HBox>
+    <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    	<HBox spacing="10" alignment="bottom_right" fx:id="profilebox">
+    		
+    	</HBox>
+    	
+        <HBox spacing="10" alignment="bottom_right" fx:id="gallerybox">
+	        <BorderPane fx:id="gallerybox_borderpane">
+	        	<center>
+		        	<GridPane fx:id="gallerybox_imagegrid" alignment="center" vgap="15" hgap="15" onMouseClicked="#clickGalleryGrid">
+		        		
+		        	</GridPane>
+		        	
+		        	<HBox spacing="10" alignment="center" fx:id="gallerybox_bigimagebox">
+		        	
+		        	</HBox>
+	        	</center>
+	        	
+	        	<bottom>
+		        	<HBox spacing="10" alignment="bottom_right" fx:id="gallerybox_controlbox">
+		                  <Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
+						  <Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
+						  <Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
+						  <Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
+					</HBox>
+				</bottom>
+			</BorderPane>
+		</HBox> 
+	</HBox>
 
-<Text fx:id="actiontarget"
-       GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+	<Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 </GridPane>
