@@ -6,43 +6,104 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:controller="ursign.ursign_client.FXHomePageController" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-	<padding>
-		<Insets top="25" right="25" bottom="10" left="25"/>
-	</padding>
+<BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
+	<top>
+        <VBox alignment="CENTER" >
+            <BorderPane.margin>
+                <Insets top="60.0" />
+            </BorderPane.margin>
+            <children>
+                <Label fx:id="title" text="REGISTER">
+                    <font>
+                        <Font name="Calibri" size="30.0" />
+                    </font>
+                </Label>
+                <Separator prefWidth="200.0" />
+            </children>
+        </VBox>
+    </top>
+	<center>
+		<VBox prefHeight="50.0" alignment="center">
+			<children>
+		    	<HBox spacing="10" alignment="bottom_right" fx:id="profilebox">
+		    		
+		    	</HBox>
+		    	
+		        <HBox spacing="10" alignment="center" fx:id="gallerybox">
+			        <BorderPane fx:id="gallerybox_borderpane">
+			        	<center>
+				        	<GridPane fx:id="gallerybox_imagegrid" alignment="center" vgap="15" hgap="15" onMouseClicked="#clickGalleryGrid">
+				        		
+				        	</GridPane>
+				        	
+				        	<HBox spacing="10" alignment="center" fx:id="gallerybox_bigimagebox">
+				        	
+				        	</HBox>
+			        	</center>
+
+					</BorderPane>
+				</HBox> 
+
+				<Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+			</children>
+		</VBox>
+	</center>
 	
-	<gridLinesVisible>
-		true
-	</gridLinesVisible>
-
-    <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="4">
-    	<HBox spacing="10" alignment="bottom_right" fx:id="profilebox">
-    		
-    	</HBox>
-    	
-        <HBox spacing="10" alignment="bottom_right" fx:id="gallerybox">
-	        <BorderPane fx:id="gallerybox_borderpane">
-	        	<center>
-		        	<GridPane fx:id="gallerybox_imagegrid" alignment="center" vgap="15" hgap="15" onMouseClicked="#clickGalleryGrid">
-		        		
-		        	</GridPane>
-		        	
-		        	<HBox spacing="10" alignment="center" fx:id="gallerybox_bigimagebox">
-		        	
-		        	</HBox>
-	        	</center>
-	        	
-	        	<bottom>
-		        	<HBox spacing="10" alignment="bottom_right" fx:id="gallerybox_controlbox">
-		                  <Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
-						  <Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
-						  <Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
-						  <Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
-					</HBox>
-				</bottom>
-			</BorderPane>
-		</HBox> 
-	</HBox>
-
-	<Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-</GridPane>
+	<bottom>
+		<VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
+            <children>
+                <Separator prefWidth="200.0" fx:id="extraControlsSep"  />
+                 <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="gallerybox_controlbox">
+					<Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
+					<Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
+					<Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
+                 	<Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
+                 </HBox>
+                 
+                 
+                 <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="profilebox_controlbox">
+                 	<Button fx:id="profilebox_mysettingsbutton" text="My Settings" underline="true" onAction="#handleProfileMySettings"></Button>
+                 	<Button fx:id="profilebox_mystudentbutton" text="My Students" underline="true" onAction="#handleProfileMyStudents"></Button>
+				 </HBox>
+                 
+                <Separator prefWidth="200.0"/>
+                <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0">
+                    <children>
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="75.0" text="Back" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                        </Button>
+                        <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="25.0" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="250.0" text="GALLERY" textAlignment="CENTER" HBox.hgrow="ALWAYS" fx:id="gallerySelector" onAction="#handleSelectGallery">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </Button>
+                        <Separator orientation="VERTICAL" prefHeight="25.0" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="250.0" text="QUIZ HOME" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                        </Button>
+                        <Separator orientation="VERTICAL" prefHeight="25.0" />
+                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="75.0" text="Profile" HBox.hgrow="ALWAYS" fx:id="profileSelector" onAction="#handleSelectProfile">
+                            <font>
+                                <Font name="Calibri" size="15.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="20.0" />
+            </padding>
+        </VBox>
+	</bottom>
+</BorderPane>

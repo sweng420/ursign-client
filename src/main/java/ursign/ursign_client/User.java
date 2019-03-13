@@ -2,6 +2,8 @@ package ursign.ursign_client;
 
 import java.util.List;
 
+import org.apache.http.cookie.Cookie;
+
 public class User {
 	private String username;
 	private Integer uid;
@@ -11,8 +13,16 @@ public class User {
 	private List<Collection> collections;
 	private List<User> children;
 	private Boolean login_complete;
-	private String cookie;
+	private List<Cookie> cookies;
 	
+	public List<Cookie> getCookies() {
+		return cookies;
+	}
+
+	public void setCookies(List<Cookie> cookies) {
+		this.cookies = cookies;
+	}
+
 	public User() {
 		this.username = "";
 		this.uid = -1;
@@ -22,7 +32,7 @@ public class User {
 		this.collections = null;
 		this.children = null;
 		this.login_complete = false;
-		this.cookie = "";
+		this.cookies = null;
 	}
 	
 	public String getUsername() {
@@ -100,12 +110,5 @@ public class User {
 	public Boolean loggedIn() {
 		return login_complete;
 	}
-	
-	public void setCookie(String s) {
-		this.cookie = s;
-	}
-	
-	public String getCookie() {
-		return this.cookie;
-	}
+
 }

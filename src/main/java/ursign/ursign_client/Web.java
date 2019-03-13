@@ -11,9 +11,12 @@ import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -22,15 +25,18 @@ import com.google.gson.JsonParser;
 
 public class Web {
 	private HttpResponse response;
-	public WebRequest makeRequest(String url, List<NameValuePair> parameters) throws Exception {
+	public WebRequest makeRequest(String url, List<NameValuePair> parameters, List<Cookie> cookies) throws Exception {
 		String err;
-		CookieHandler.setDefault(new CookieManager());
-		HttpClient client = HttpClientBuilder.create().build();
+		CookieStore httpCookieStore = new BasicCookieStore();
+		for(Cookie c : cookies) {
+			httpCookieStore.addCookie(c);
+		}
+		HttpClient client = HttpClientBuilder.create().setDefaultCookieStore(httpCookieStore).build();
+
 		HttpPost post = new HttpPost(url);
-	
-		// add header
+		
 		post.setHeader("User-Agent", "test");
-	
+		
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		for(NameValuePair p : parameters){
 			urlParameters.add(p);
@@ -45,6 +51,7 @@ public class Web {
 	
 		
 		try {
+			System.out.println(post.toString());
 				response = client.execute(post);
 				
 				System.out.println("Response Code : " 
@@ -66,7 +73,7 @@ public class Web {
 		
 					err = jsonObject.get("error").getAsString();
 					
-					return new WebRequest(err, jsonObject);
+					return new WebRequest(err, jsonObject, httpCookieStore.getCookies());
 		    	} catch (Exception e) {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();

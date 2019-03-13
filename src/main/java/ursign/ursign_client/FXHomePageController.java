@@ -52,19 +52,34 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.Separator;
 
 public class FXHomePageController {
 	private User u;
     @FXML private Text actiontarget;
     
+    // gallerybox view
+    @FXML private HBox gallerybox;
     @FXML private GridPane gallerybox_imagegrid;
     @FXML private HBox gallerybox_bigimagebox;
-    @FXML private HBox controlBar;
+    @FXML private HBox gallerybox_controlbox;
     @FXML private Button gallerybox_nextbutton;
     @FXML private Button gallerybox_prevbutton;
     @FXML private Button gallerybox_slideshowbutton;
     @FXML private Button gallerybox_gallerybutton;
     @FXML private BorderPane gallerybox_borderpane;
+    
+    
+    @FXML private Separator extraControlsSep;
+    
+    // profilebox view
+    @FXML private HBox profilebox;
+    @FXML private HBox profilebox_controlbox;
+    
+    // bottom (constant) view
+    @FXML private Button gallerySelector;
+    @FXML private Button profileSelector;
+   // @FXML private HBox galleryControls;
 	
     private Image imageList[] = new Image[26];
     private ImageView imageGalleryNodeList[] = new ImageView[26];
@@ -79,6 +94,14 @@ public class FXHomePageController {
 	private int currentSlideNode = 0;
 	
 	private Path dataDirectory = Paths.get(System.getProperty("user.home"), ".YSS", "ursign");
+	
+	public FXHomePageController(User given_user) {
+        this.u = given_user ;
+    }
+
+    public FXHomePageController() {
+        this(new User());
+    }
 	
 	private void initialize_gallery() {
 
@@ -113,6 +136,48 @@ public class FXHomePageController {
 		}
 	}
 	
+	@FXML protected void handleProfileMySettings(ActionEvent event) {
+	}
+	
+	@FXML protected void handleProfileMyStudents(ActionEvent event) {
+	}
+	
+	@FXML protected void handleSelectProfile(ActionEvent event) {
+		gallerybox_controlbox.setVisible(false);
+		profilebox_controlbox.setVisible(true);
+		gallerybox.setVisible(false);
+		profilebox.setVisible(true);
+	}
+	
+	@FXML protected void handleSelectGallery(ActionEvent event) {
+		inSlideShow = false;
+		gallerybox_borderpane.setCenter(gallerybox_imagegrid);
+		gallerybox_slideshowbutton.setDisable(false);
+		gallerybox_gallerybutton.setDisable(true);
+		gallerybox_borderpane.setRight(null);
+		
+		gallerybox.setVisible(true);
+		profilebox.setVisible(false);
+		gallerybox_controlbox.setVisible(true);
+		profilebox_controlbox.setVisible(false);
+		
+		Web webObject = new Web();
+		
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("x", "y"));
+		WebRequest wr;
+		System.out.println(getUser().getUsername());
+		try {
+			wr = webObject.makeRequest("http://erostratus.net:5000/myinfo", urlParameters, u.getCookies());
+			if(!wr.hasError()) {
+				System.out.println(wr.getJSON().toString());
+			} else {
+				System.out.println(wr.getError());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@FXML protected void handleGalleryNext(ActionEvent event) {
 		if (gridLastNodeIndex != imageGalleryNodeList.length && inSlideShow == false){
 			emptyGrid();
@@ -162,15 +227,17 @@ public class FXHomePageController {
 	    }
 	}
 	
-	
-	
 
-	private void initialize_profile() {}
+	private void initialize_profile() {
+		
+	}
 	
 	public void initialize() {
 		System.out.println("!!");
 		initialize_gallery();
 		initialize_profile();
+		
+		gallerybox_controlbox.setVisible(false);
 	}
 	
 	public void fillGrid(int start){
@@ -192,13 +259,8 @@ public class FXHomePageController {
 		gallerybox_imagegrid.getChildren().removeAll(imageGalleryNodeList);
 	}
 	
-	public int getGirdNum(int col, int row){
-		
-		int gridPos = 0;
-		
-		gridPos = (3*row) + col;
-		
-		return gridPos;
+	public int getGirdNum(int col, int row){		
+		return (3*row) + col;
 	}
 	
 	public void enterSlideShow(int startImageIndex){

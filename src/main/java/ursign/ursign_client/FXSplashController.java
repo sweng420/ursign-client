@@ -17,6 +17,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -25,6 +26,7 @@ import com.google.gson.JsonParser;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,6 +36,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class FXSplashController {
+	
+	
+	
 	@FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Text actiontarget;
@@ -45,6 +50,7 @@ public class FXSplashController {
 		put("bad-username", "Bad username");
 		put("bad-login", "Bad login details");
 		put("username-taken", "Username already in use");
+		put("unauthorized", "You cannot access without correct credentials.");
 	}};
     
 	@FXML protected void handleRegisterTransition(ActionEvent event) {
@@ -81,31 +87,23 @@ public class FXSplashController {
     	    	
     			WebRequest wr;
 				try {
-					wr = webObject.makeRequest("http://erostratus.net:5000/login", urlParameters);
+					wr = webObject.makeRequest("http://erostratus.net:5000/login", urlParameters, new ArrayList<Cookie>());
 					
 					if(!wr.hasError()){
-						setCookies(webObject.getResponse().getFirstHeader("Set-Cookie") == null ? "" : 
-							webObject.getResponse().getFirstHeader("Set-Cookie").toString());
-						
-						System.out.println(cookies);
-
 						u = new User();
-						u.setCookie(getCookies());
+						u.setCookies(wr.getCookies());
 						u.setUsername(uname);
 						u.setUid(1);
 						
 						Stage stage = (Stage)usernameField.getScene().getWindow();
 						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
-
-						Parent root;
-							root = (Parent)fxmlLoader.load();
-							FXHomePageController controller = fxmlLoader.<FXHomePageController>getController();
-							controller.setUser(u);
-							Scene scene = new Scene(root, 1000, 500); 
-
-							stage.setScene(scene);    
-
-							stage.show();   
+						FXHomePageController controller = new FXHomePageController(u); /* pass the user to the HomePage controller */
+						fxmlLoader.setController(controller);
+						Node root = fxmlLoader.load();			
+						Scene scene = new Scene((Parent)root, 1000, 500); 
+						stage.setScene(scene);    
+						stage.show();
+						
 					} else {
 						actiontarget.setText(wr.getError());
 					}
