@@ -55,7 +55,7 @@ public class FXSplashController {
 			try {
 				root = (Parent)fxmlLoader.load();
 				FXRegisterController controller = fxmlLoader.<FXRegisterController>getController();
-				//controller.setUser(u);
+				
 				Scene scene = new Scene(root, 1000, 500); 
 
 				stage.setScene(scene);    
@@ -70,105 +70,51 @@ public class FXSplashController {
 	
 	
     @FXML protected void handleLogin(ActionEvent event) {
-        //actiontarget.setText("Sign in button pressed");
-        
-        String uname = usernameField.getText();
-        String password = passwordField.getText();
-        
-        System.out.println(uname+" "+password);
-        
-    	String url = "http://erostratus.net:5000/login";
-
-    	CookieHandler.setDefault(new CookieManager());
-    	HttpClient client = HttpClientBuilder.create().build();
-    	HttpPost post = new HttpPost(url);
-
-    	// add header
-    	post.setHeader("User-Agent", "test");
-
-    	List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-    	urlParameters.add(new BasicNameValuePair("username", uname));
-    	urlParameters.add(new BasicNameValuePair("password", password));
-    	/*urlParameters.add(new BasicNameValuePair("locale", ""));
-    	urlParameters.add(new BasicNameValuePair("caller", ""));
-    	urlParameters.add(new BasicNameValuePair("num", "12345"));*/
-
-    	try {
-			post.setEntity(new UrlEncodedFormEntity(urlParameters));
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-    	HttpResponse response;
-		try {
-			response = client.execute(post);
-			
-			System.out.println("Response Code : " 
-                    + response.getStatusLine().getStatusCode());
-
-    	BufferedReader rd;
-		try {
-			rd = new BufferedReader(
-			        new InputStreamReader(response.getEntity().getContent()));
-			StringBuffer result = new StringBuffer();
-	    	String line = "";
-	    	try {
-				while ((line = rd.readLine()) != null) {
-					result.append(line);
-				}
-				System.out.println(result);
-				
-				JsonObject jsonObject = new JsonParser().parse(result.toString()).getAsJsonObject();
-
-				err = jsonObject.get("error").getAsString();
-				
-				if(err.equals("")){
-					setCookies(response.getFirstHeader("Set-Cookie") == null ? "" : 
-	                    response.getFirstHeader("Set-Cookie").toString());
+    			String uname = usernameField.getText();
+    			String password = passwordField.getText();
+    			
+    			Web webObject = new Web();
+    			
+    			List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+    	    	urlParameters.add(new BasicNameValuePair("username", uname));
+    	    	urlParameters.add(new BasicNameValuePair("password", password));
+    	    	
+    			WebRequest wr;
+				try {
+					wr = webObject.makeRequest("http://erostratus.net:5000/login", urlParameters);
 					
-					System.out.println(cookies);
+					if(!wr.hasError()){
+						setCookies(webObject.getResponse().getFirstHeader("Set-Cookie") == null ? "" : 
+							webObject.getResponse().getFirstHeader("Set-Cookie").toString());
+						
+						System.out.println(cookies);
 
-					u = new User();
-					u.setCookie(getCookies());
-					u.setUsername(uname);
-					u.setUid(1);
-					
-					Stage stage = (Stage)usernameField.getScene().getWindow();
-					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
+						u = new User();
+						u.setCookie(getCookies());
+						u.setUsername(uname);
+						u.setUid(1);
+						
+						Stage stage = (Stage)usernameField.getScene().getWindow();
+						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
 
-					Parent root;
-						root = (Parent)fxmlLoader.load();
-						FXHomePageController controller = fxmlLoader.<FXHomePageController>getController();
-						controller.setUser(u);
-						Scene scene = new Scene(root, 1000, 500); 
+						Parent root;
+							root = (Parent)fxmlLoader.load();
+							FXHomePageController controller = fxmlLoader.<FXHomePageController>getController();
+							controller.setUser(u);
+							Scene scene = new Scene(root, 1000, 500); 
 
-						stage.setScene(scene);    
+							stage.setScene(scene);    
 
-						stage.show();   
-				} else {
-					actiontarget.setText(messageMap.get(err));
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (UnsupportedOperationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-		} catch (ClientProtocolException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    }
+							stage.show();   
+					} else {
+						actiontarget.setText(wr.getError());
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+	}
+
     public String getCookies() {
     	return cookies;
       }

@@ -10,4 +10,16 @@ public class WebRequest {
 		this.errorMessage = em;
 		this.jsonContent = jc;
 	}
+	
+	public Boolean hasError() {
+		return this.errorMessage.length() > 0;
+	}
+	
+	public String getError() {
+		return this.errorMessage;
+	}
+	
+	public JsonObject getJSON() {
+		return this.jsonContent;
+	}
 }

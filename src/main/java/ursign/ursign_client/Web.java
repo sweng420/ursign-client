@@ -21,7 +21,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class Web {
-	public WebRequest makeRequest(String url, List<BasicNameValuePair> parameters) throws Exception {
+	private HttpResponse response;
+	public WebRequest makeRequest(String url, List<NameValuePair> parameters) throws Exception {
 		String err;
 		CookieHandler.setDefault(new CookieManager());
 		HttpClient client = HttpClientBuilder.create().build();
@@ -31,7 +32,7 @@ public class Web {
 		post.setHeader("User-Agent", "test");
 	
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-		for(BasicNameValuePair p : parameters){
+		for(NameValuePair p : parameters){
 			urlParameters.add(p);
 		}
 	
@@ -42,7 +43,7 @@ public class Web {
 			e1.printStackTrace();
 		}
 	
-		HttpResponse response;
+		
 		try {
 				response = client.execute(post);
 				
@@ -81,5 +82,9 @@ public class Web {
 			//e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	public HttpResponse getResponse() {
+		return response;
 	}
 }
