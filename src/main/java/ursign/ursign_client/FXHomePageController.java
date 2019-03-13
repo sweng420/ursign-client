@@ -11,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import javafx.event.Event;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -52,7 +53,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.Tab;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 public class FXHomePageController {
 	private User u;
@@ -75,11 +82,24 @@ public class FXHomePageController {
     // profilebox view
     @FXML private HBox profilebox;
     @FXML private HBox profilebox_controlbox;
+    @FXML private GridPane labels_fields;
+    @FXML private Button profilebox_editbutton;
+    @FXML private Button profilebox_savebutton;
     
     // bottom (constant) view
     @FXML private Button gallerySelector;
     @FXML private Button profileSelector;
-   // @FXML private HBox galleryControls;
+    
+    // top (title) view
+    @FXML private VBox galleryTitleBox;
+    @FXML private HBox profileTitleBox;
+    @FXML private ImageView iconimage;
+    @FXML private StackPane titleStackPane;
+    
+    // tabs
+    @FXML private TabPane tabpane;
+    @FXML private Tab profiletab;
+    @FXML private Tab gallerytab;
 	
     private Image imageList[] = new Image[26];
     private ImageView imageGalleryNodeList[] = new ImageView[26];
@@ -136,8 +156,21 @@ public class FXHomePageController {
 		}
 	}
 	
-	@FXML protected void handleProfileMySettings(ActionEvent event) {
+	@FXML protected void handleProfileEdit(ActionEvent event) {
+		for (Node child : labels_fields.getChildren()) {
+            if(GridPane.getColumnIndex(child) == 1){
+            	child.setVisible(!child.isVisible());
+            }
+        }
+		
+		profilebox_savebutton.setVisible(true);
+		profilebox_editbutton.setVisible(false);
 	}
+	
+	@FXML protected void handleProfileSave(ActionEvent event) {
+		
+	}
+	
 	
 	@FXML protected void handleProfileMyStudents(ActionEvent event) {
 	}
@@ -145,9 +178,19 @@ public class FXHomePageController {
 	@FXML protected void handleSelectProfile(ActionEvent event) {
 		gallerybox_controlbox.setVisible(false);
 		profilebox_controlbox.setVisible(true);
-		gallerybox.setVisible(false);
-		profilebox.setVisible(true);
+		//gallerybox.setVisible(false);
+		//profilebox.setVisible(true);
+		//galleryTitleBox.setVisible(false);
+		//profileTitleBox.setVisible(true);
 	}
+	
+	@FXML
+    void event(Event ev) {
+        if (gallerytab.isSelected()) {
+            System.out.println("Tab is Selected");
+            //Do stuff here
+        }
+    }
 	
 	@FXML protected void handleSelectGallery(ActionEvent event) {
 		inSlideShow = false;
@@ -156,27 +199,12 @@ public class FXHomePageController {
 		gallerybox_gallerybutton.setDisable(true);
 		gallerybox_borderpane.setRight(null);
 		
-		gallerybox.setVisible(true);
-		profilebox.setVisible(false);
-		gallerybox_controlbox.setVisible(true);
-		profilebox_controlbox.setVisible(false);
-		
-		Web webObject = new Web();
-		
-		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-		urlParameters.add(new BasicNameValuePair("x", "y"));
-		WebRequest wr;
-		System.out.println(getUser().getUsername());
-		try {
-			wr = webObject.makeRequest("http://erostratus.net:5000/myinfo", urlParameters, u.getCookies());
-			if(!wr.hasError()) {
-				System.out.println(wr.getJSON().toString());
-			} else {
-				System.out.println(wr.getError());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		//gallerybox.setVisible(true);
+		//profilebox.setVisible(false);
+		//gallerybox_controlbox.setVisible(true);
+		//profilebox_controlbox.setVisible(false);
+		//galleryTitleBox.setVisible(true);
+		//profileTitleBox.setVisible(false);
 	}
 	@FXML protected void handleGalleryNext(ActionEvent event) {
 		if (gridLastNodeIndex != imageGalleryNodeList.length && inSlideShow == false){
@@ -229,7 +257,37 @@ public class FXHomePageController {
 	
 
 	private void initialize_profile() {
+		Image imageVar;
+		File imageFile;
+		ImageView imageViewFile;
+		imageFile = new File("images/icon.jpg");
+		imageVar = new Image("file:"+imageFile.getAbsolutePath());
 		
+		//Create list of ImageView nodes of size 100x100 for image gallery
+		imageViewFile = new ImageView(imageVar);
+		imageViewFile.setPreserveRatio(false);
+		imageViewFile.setFitWidth(150);
+		imageViewFile.setFitHeight(150);
+		
+		iconimage.setImage(imageVar);
+		
+		Web webObject = new Web();
+		
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("x", "y"));
+		WebRequest wr;
+		System.out.println(getUser().getUsername());
+		try {
+			wr = webObject.makeRequest("http://erostratus.net:5000/myinfo", urlParameters, u.getCookies());
+			if(!wr.hasError()) {
+				//System.out.println(wr.getJSON().toString());
+				
+			} else {
+				System.out.println(wr.getError());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void initialize() {
@@ -237,7 +295,20 @@ public class FXHomePageController {
 		initialize_gallery();
 		initialize_profile();
 		
-		gallerybox_controlbox.setVisible(false);
+		//galleryTitleBox.setVisible(false);
+		//gallerybox_controlbox.setVisible(false);
+		
+		/*tabpane.getSelectionModel().selectedItemProperty().addListener(
+			    new ChangeListener<Tab>() {
+			        //@Override
+			        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+			            System.out.println(t.idProperty());
+			        }
+			    }
+			);*/
+		
+		//titleStackPane.getChildren().remove(0);
+		
 	}
 	
 	public void fillGrid(int start){
