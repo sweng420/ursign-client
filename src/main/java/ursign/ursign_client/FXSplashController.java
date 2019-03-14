@@ -54,19 +54,18 @@ public class FXSplashController {
 	}};
     
 	@FXML protected void handleRegisterTransition(ActionEvent event) {
-		Stage stage = (Stage)usernameField.getScene().getWindow();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXRegister.fxml"));     
 
-		Parent root;
 			try {
-				root = (Parent)fxmlLoader.load();
-				FXRegisterController controller = fxmlLoader.<FXRegisterController>getController();
-				
-				Scene scene = new Scene(root, 1000, 500); 
 
+				Stage stage = (Stage)usernameField.getScene().getWindow();
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXRegister.fxml"));     
+				FXRegisterController controller = new FXRegisterController(0); /* no parent here, main registration screen */
+				fxmlLoader.setController(controller);
+				Node root = fxmlLoader.load();			
+				Scene scene = new Scene((Parent)root, 1000, 500); 
 				stage.setScene(scene);    
-
-				stage.show(); 
+				stage.show();
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -90,10 +89,11 @@ public class FXSplashController {
 					wr = webObject.makeRequest("http://erostratus.net:5000/login", urlParameters, new ArrayList<Cookie>());
 					
 					if(!wr.hasError()){
+						System.out.println(Integer.decode(wr.getJSON().get("userid").toString()));
 						u = new User();
 						u.setCookies(wr.getCookies());
 						u.setUsername(uname);
-						u.setUid(1);
+						u.setUid(Integer.decode(wr.getJSON().get("userid").toString()));
 						
 						Stage stage = (Stage)usernameField.getScene().getWindow();
 						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     

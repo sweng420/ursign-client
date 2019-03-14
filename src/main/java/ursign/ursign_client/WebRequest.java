@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 public class WebRequest {
 	private String errorMessage;
 	private JsonObject jsonContent;
+	private String jsonString;
 	private List<Cookie> cookies;
 	
 	WebRequest(String em, JsonObject jc, List<Cookie> cs) {
@@ -27,6 +28,14 @@ public class WebRequest {
 	
 	public JsonObject getJSON() {
 		return this.jsonContent;
+	}
+	
+	public String getJSONString() {
+		return jsonString;
+	}
+	
+	public void setJSONString(String jsonString) {
+		this.jsonString = jsonString;
 	}
 	
 	public List<Cookie> getCookies() {

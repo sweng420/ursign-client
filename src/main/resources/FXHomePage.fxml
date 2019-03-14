@@ -16,6 +16,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import ursign.ursign_client.*?>
 
 <BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
 	<center>
@@ -40,7 +48,7 @@
 					            </ImageView>
 					              <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
 					                  <children>
-					                      <Label fx:id="title" text="Joseph Bloggins">
+					                      <Label fx:id="profiletitle">
 					                          <font>
 					                              <Font name="Calibri" size="36.0" />
 					                          </font>
@@ -61,49 +69,95 @@
 			
 
 					<center>
+					<VBox>
+					<children>
 						<HBox spacing="10"  alignment="center" fx:id="profilebox">
 					    		<BorderPane>
 						    		<center>
 							    		<GridPane fx:id="labels_fields" hgap="10" vgap="10">
 							    			<children>
-							    				<Text text="Welcome" 
+							    				<!--<Text text="Welcome" 
 	        										GridPane.columnIndex="0" GridPane.rowIndex="0"
-	        										GridPane.columnSpan="2"/>
+	        										GridPane.columnSpan="2"/>-->
 	 
 											    <Label text="User Name:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-											 	<Label text="JoeBloggs" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+											 	<Label text="JoeBloggs" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="usernameLabel"/>
 											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="1" visible="false"/>
+											        GridPane.columnIndex="1" GridPane.rowIndex="1" visible="false" fx:id="usernameTextfield"/>
 											        
-											    <Label text="Passwoed:"
+											    <Label text="Password:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-											 	<Label text="***********" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="2" visible="false"/>
+											 	<Label text="***********" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="passwordLabel" />
+											    <PasswordField 
+											        GridPane.columnIndex="1" GridPane.rowIndex="2" visible="false" fx:id="passwordTextfield"/>
 											    
 											    <Label text="Real name:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-											 	<Label text="Joe Bloggs" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+											 	<Label text="Joe Bloggs" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="realnameLabel" />
 											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="3" visible="false"/>
+											        GridPane.columnIndex="1" GridPane.rowIndex="3" visible="false" fx:id="realnameTextfield"/>
 											        
 											    <Label text="Age:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-											 	<Label text="21" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false"/>
+											 	<Label text="21" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="AgeLabel" />
+											    <Spinner GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false" min="0" max="100" initialValue="30" editable="true" fx:id="ageTextfield" />
 											        
 											    <Label text="E-mail:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-											 	<Label text="joe@bloggs" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+											 	<Label text="joe@bloggs" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="emailLabel" />
 											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false"/> 
+											        GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false" fx:id="emailTextfield"/> 
 											</children>
 							    		</GridPane>
 				     				</center>
 								</BorderPane>
 					    	</HBox>
+					    	<Separator prefWidth="200.0" fx:id="extraControlsSep"  />
+					    	<HBox spacing="10"  alignment="center" fx:id="detailsbox">
+					    		<VBox>
+					    		<children>
+						    	<Label text="My Students" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+							            style="-fx-font: NORMAL 12 Tahoma;"/>
+							 
+							     <TableView fx:id="childrenTableView" GridPane.columnIndex="0" 
+							                    GridPane.rowIndex="1">
+							          <columns>
+							              <TableColumn fx:id="firstNameColumn" text="Username" prefWidth="100">
+							                  <cellValueFactory>
+							                      <PropertyValueFactory property="username" />
+							                  </cellValueFactory>
+							                  <cellFactory>
+							                      <FormattedTableCellFactory alignment="center">
+							                      </FormattedTableCellFactory>
+							                  </cellFactory>
+							              </TableColumn>
+							              <TableColumn text="E-mail" prefWidth="100">
+							                  <cellValueFactory>
+							                      <PropertyValueFactory property="email" />
+							                  </cellValueFactory>
+							              </TableColumn>
+							              <TableColumn text="Age" prefWidth="200">
+							                  <cellValueFactory>
+							                      <PropertyValueFactory property="age" />
+							                  </cellValueFactory>
+							              </TableColumn>
+							          </columns>    
+							          <items>
+							              <FXCollections fx:factory="observableArrayList">
+							                  <User username="test" uid="1" email="x" realname="y" age="21"/>
+							                  
+							              </FXCollections>
+							          </items>
+							          <sortOrder>
+							              <fx:reference source="firstNameColumn"/>
+							          </sortOrder> 
+							     </TableView>
+							     </children>
+							     </VBox>
+					    	</HBox>
+					    </children>
+					   </VBox>
 					    </center>
 					    <bottom>
 						    <VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
@@ -112,7 +166,8 @@
 						    		<HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="profilebox_controlbox">
 		                 				<Button fx:id="profilebox_savebutton" text="Save Profile" underline="true" onAction="#handleProfileSave" visible="false"></Button>
 		                 				<Button fx:id="profilebox_editbutton" text="Edit Profile" underline="true" onAction="#handleProfileEdit"></Button>
-		                 				<Button fx:id="profilebox_mystudentbutton" text="My Students" underline="true" onAction="#handleProfileMyStudents"></Button>
+		                 				<Button fx:id="profilebox_registerstudentbutton" text="Register Student" underline="true" onAction="#handleRegisterStudent"></Button>
+		                 				<!--<Button fx:id="profilebox_mystudentbutton" text="My Students" underline="true" onAction="#handleProfileMyStudents"></Button>-->
 						 			</HBox>
 						 		</children>
 						 	</VBox>

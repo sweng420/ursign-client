@@ -1,5 +1,6 @@
 package ursign.ursign_client;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.cookie.Cookie;
@@ -10,6 +11,7 @@ public class User {
 	private String email;
 	private String realname;
 	private Integer born;
+	private Integer age;
 	private List<Collection> collections;
 	private List<User> children;
 	private Boolean login_complete;
@@ -22,6 +24,19 @@ public class User {
 	public void setCookies(List<Cookie> cookies) {
 		this.cookies = cookies;
 	}
+	
+	public User(String username, String email, Integer born, String realname, Integer id) {
+		this.username = username;
+		this.uid = id;
+		this.email = email;
+		this.realname = realname;
+		this.born = born;
+		this.age = Calendar.getInstance().get(Calendar.YEAR) - born;
+		this.collections = null;
+		this.children = null;
+		this.login_complete = false;
+		this.cookies = null;
+	}
 
 	public User() {
 		this.username = "";
@@ -29,6 +44,7 @@ public class User {
 		this.email = "";
 		this.realname = "";
 		this.born = 0;
+		this.age = 0;
 		this.collections = null;
 		this.children = null;
 		this.login_complete = false;
@@ -109,6 +125,15 @@ public class User {
 
 	public Boolean loggedIn() {
 		return login_complete;
+	}
+	
+	public void setAge(Integer age) {
+		this.age = age;
+		this.born = Calendar.getInstance().get(Calendar.YEAR) - age;
+	}
+	
+	public Integer getAge() {
+		return age;
 	}
 
 }

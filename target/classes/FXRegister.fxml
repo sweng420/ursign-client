@@ -18,7 +18,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.image.Image?>
 
-<BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ursign.ursign_client.FXRegisterController">
+<BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <bottom>
         <VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
             <children>
@@ -87,19 +87,19 @@
                         <Insets left="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="usernameTextfield" />
                   <Label text="Password">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <PasswordField />
+                  <PasswordField fx:id="passwordTextfield" />
                   <Label text="Confirm Password">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <PasswordField />
+                  <PasswordField fx:id="confirmPasswordTextfield" />
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
@@ -132,30 +132,30 @@
                         <Insets left="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="emailTextfield" />
                   <Label text="Name">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField />
+                  <TextField fx:id="realnameTextfield"  />
                   <Label text="Age">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <Spinner min="0" max="100" initialValue="30" editable="true"/>
+                  <Spinner min="0" max="100" initialValue="30" editable="true" fx:id="ageTextfield"/>
                   <Label text="Gender">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <ComboBox prefWidth="150.0">
+                  <ComboBox prefWidth="150.0" fx:id="genderTextfield">
                       <items>
                           <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Male"/>
                               <String fx:value="Female"/>
-                              <String fx:value="Hermaphrodite"/>
+                              <String fx:value="Prefer not to say"/>
                           </FXCollections>
                       </items>
                   </ComboBox>

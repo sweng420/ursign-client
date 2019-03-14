@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +33,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;
@@ -55,11 +61,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.TableView;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Spinner;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.stage.Modality;
+import javafx.collections.ObservableList;
+import javafx.beans.binding.Bindings;
+import org.JSON;
+
+import java.util.Calendar;
 
 public class FXHomePageController {
 	private User u;
@@ -85,6 +99,18 @@ public class FXHomePageController {
     @FXML private GridPane labels_fields;
     @FXML private Button profilebox_editbutton;
     @FXML private Button profilebox_savebutton;
+    @FXML private Label usernameLabel;
+    @FXML private TextField usernameTextfield;
+    @FXML private Label passwordLabel;
+    @FXML private PasswordField passwordTextfield;
+    @FXML private Label realnameLabel;
+    @FXML private TextField realnameTextfield;
+    @FXML private Label ageLabel;
+    @FXML private Spinner<Integer> ageTextfield;
+    @FXML private Label emailLabel;
+    @FXML private TextField emailTextfield;
+    @FXML private TableView childrenTableView;
+    @FXML private Label profiletitle;
     
     // bottom (constant) view
     @FXML private Button gallerySelector;
@@ -156,6 +182,32 @@ public class FXHomePageController {
 		}
 	}
 	
+	@FXML protected void handleRegisterStudent(ActionEvent event) {
+		
+		try {
+			//Stage stage = (Stage)usernameField.getScene().getWindow();
+			System.out.println("uid: "+u.getUid());
+			Stage stage = new Stage();
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXRegister.fxml"));     
+			FXRegisterController controller = new FXRegisterController(u.getUid()); /* pass the user to the HomePage controller */
+			fxmlLoader.setController(controller);
+			Node root = fxmlLoader.load();			
+			Scene scene = new Scene((Parent)root, 1000, 500);
+			stage.setScene(scene);
+			stage.setTitle("My modal window");
+		    stage.initModality(Modality.WINDOW_MODAL);
+		    stage.initOwner(
+		        ((Node)event.getSource()).getScene().getWindow() );
+			stage.show();
+			
+			initialize_profile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	}
+	
 	@FXML protected void handleProfileEdit(ActionEvent event) {
 		for (Node child : labels_fields.getChildren()) {
             if(GridPane.getColumnIndex(child) == 1){
@@ -168,7 +220,44 @@ public class FXHomePageController {
 	}
 	
 	@FXML protected void handleProfileSave(ActionEvent event) {
-		
+		if(usernameTextfield.getText().trim().length() > 0 &&
+			passwordTextfield.getText().trim().length() > 0 &&
+			realnameTextfield.getText().trim().length() > 0 &&
+			emailTextfield.getText().trim().length() > 0 &&
+			ageTextfield.getValue() >= 5) {
+				Web webObject = new Web();
+				
+				List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+				urlParameters.add(new BasicNameValuePair("username", usernameTextfield.getText().trim()));
+				urlParameters.add(new BasicNameValuePair("password", passwordTextfield.getText().trim()));
+				urlParameters.add(new BasicNameValuePair("realname", realnameTextfield.getText().trim()));
+				urlParameters.add(new BasicNameValuePair("email", emailTextfield.getText().trim()));
+				urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-ageTextfield.getValue())));
+				WebRequest wr;
+				
+				try {
+					wr = webObject.makeRequest("http://erostratus.net:5000/updateinfo", urlParameters, u.getCookies());
+					if(!wr.hasError()) {
+						for (Node child : labels_fields.getChildren()) {
+				            if(GridPane.getColumnIndex(child) == 1){
+				            	child.setVisible(!child.isVisible());
+				            }
+				        }
+						
+						initialize_profile();
+						
+						profilebox_savebutton.setVisible(false);
+						profilebox_editbutton.setVisible(true);
+						
+						
+					} else {
+						System.out.println(wr.getError());
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+				
 	}
 	
 	
@@ -257,6 +346,7 @@ public class FXHomePageController {
 	
 
 	private void initialize_profile() {
+		profiletitle.setText(u.getUsername());
 		Image imageVar;
 		File imageFile;
 		ImageView imageViewFile;
@@ -278,9 +368,55 @@ public class FXHomePageController {
 		WebRequest wr;
 		System.out.println(getUser().getUsername());
 		try {
+			/* populate the table at the top of the profile page */
 			wr = webObject.makeRequest("http://erostratus.net:5000/myinfo", urlParameters, u.getCookies());
 			if(!wr.hasError()) {
-				//System.out.println(wr.getJSON().toString());
+				u.setRealname(wr.getJSON().getAsJsonObject("user").get("realname").getAsString());
+				u.setEmail(wr.getJSON().getAsJsonObject("user").get("email").getAsString());
+				u.setBorn(Integer.getInteger(wr.getJSON().getAsJsonObject("user").get("born").getAsString()));
+				
+				usernameTextfield.setText(u.getUsername());
+				usernameLabel.setText(u.getUsername());
+				passwordTextfield.setText("");
+				passwordLabel.setText("*****");
+				realnameTextfield.setText(u.getRealname());
+				realnameLabel.setText(u.getRealname());
+				emailTextfield.setText(u.getEmail());
+				emailLabel.setText(u.getEmail());
+				
+				//ageLabel.setText(Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-u.getBorn()));
+				//ageTextfield.getValueFactory().setValue(Calendar.getInstance().get(Calendar.YEAR)-u.getBorn());
+
+				/*JsonElement children = wr.getJSON().get("children");
+				Type listType = new TypeToken<List<User>>() {}.getType();
+				List<User> childrenList = new Gson().fromJson(children, listType);
+				
+				if(children != null) {
+					for(User child : childrenList) {
+						System.out.println(child.getUid());
+					}
+				}*/
+				
+				/* Unfortunately gson has horrible support (see commented out code above) for reading through
+				 * a JSON array, so we're using org.JSON for this limited parsing
+				 */
+				JSONObject jo = new JSONObject(wr.getJSONString());
+				JSONArray ja = jo.getJSONArray("children");
+				
+				ObservableList<User> childUsers = childrenTableView.getItems();
+
+				childUsers.removeAll();
+				for(int j = 0; j < ja.length(); j++) {
+					childUsers.add(new User(ja.getJSONObject(j).getString("username"),
+											ja.getJSONObject(j).getString("email"),
+											ja.getJSONObject(j).getInt("born"),
+											ja.getJSONObject(j).getString("realname"),
+											ja.getJSONObject(j).getInt("id")));
+				}
+				
+				/* "hack" to set the size of the table */
+				childrenTableView.setFixedCellSize(25);
+				childrenTableView.prefHeightProperty().bind(Bindings.size(childrenTableView.getItems()).multiply(childrenTableView.getFixedCellSize()).add(30));
 				
 			} else {
 				System.out.println(wr.getError());

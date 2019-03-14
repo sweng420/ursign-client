@@ -73,7 +73,9 @@ public class Web {
 		
 					err = jsonObject.get("error").getAsString();
 					
-					return new WebRequest(err, jsonObject, httpCookieStore.getCookies());
+					WebRequest wr = new WebRequest(err, jsonObject, httpCookieStore.getCookies());
+					wr.setJSONString(result.toString());
+					return wr;
 		    	} catch (Exception e) {
 					// TODO Auto-generated catch block
 					//e.printStackTrace();
