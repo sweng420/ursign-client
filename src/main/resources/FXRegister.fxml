@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,56 +18,13 @@
 <?import javafx.scene.image.Image?>
 
 <BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <bottom>
-        <VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
-            <children>
-                <Separator prefWidth="200.0" />
-                <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0">
-                    <children>
-                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="75.0" text="Back" HBox.hgrow="ALWAYS">
-                            <font>
-                                <Font name="Calibri" size="15.0" />
-                            </font>
-                        </Button>
-                        <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="25.0" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="250.0" text="GALLERY" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-                            <font>
-                                <Font name="Calibri" size="15.0" />
-                            </font>
-                            <opaqueInsets>
-                                <Insets />
-                            </opaqueInsets>
-                        </Button>
-                        <Separator orientation="VERTICAL" prefHeight="25.0" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="250.0" text="QUIZ HOME" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-                            <font>
-                                <Font name="Calibri" size="15.0" />
-                            </font>
-                        </Button>
-                        <Separator orientation="VERTICAL" prefHeight="25.0" />
-                        <Button maxWidth="-Infinity" mnemonicParsing="false" prefWidth="75.0" text="Profile" HBox.hgrow="ALWAYS">
-                            <font>
-                                <Font name="Calibri" size="15.0" />
-                            </font>
-                        </Button>
-                    </children>
-                    <padding>
-                        <Insets left="5.0" right="5.0" />
-                    </padding>
-                </HBox>
-            </children>
-            <padding>
-                <Insets top="20.0" />
-            </padding>
-        </VBox>
-    </bottom>
     <top>
         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets top="60.0" />
             </BorderPane.margin>
             <children>
-                <Label fx:id="title" text="REGISTER">
+                <Label fx:id="title" text="Register">
                     <font>
                         <Font name="Calibri" size="30.0" />
                     </font>
@@ -144,7 +100,7 @@
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <Spinner min="0" max="100" initialValue="30" editable="true" fx:id="ageTextfield"/>
+                  <TextField fx:id="ageTextfield"/> 
                   <Label text="Gender">
                      <VBox.margin>
                         <Insets top="30.0" />

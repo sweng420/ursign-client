@@ -62,7 +62,7 @@ public class FXSplashController {
 				FXRegisterController controller = new FXRegisterController(0); /* no parent here, main registration screen */
 				fxmlLoader.setController(controller);
 				Node root = fxmlLoader.load();			
-				Scene scene = new Scene((Parent)root, 1000, 500); 
+				Scene scene = new Scene((Parent)root, 1000, 725); 
 				stage.setScene(scene);    
 				stage.show();
 				
@@ -100,7 +100,7 @@ public class FXSplashController {
 						FXHomePageController controller = new FXHomePageController(u); /* pass the user to the HomePage controller */
 						fxmlLoader.setController(controller);
 						Node root = fxmlLoader.load();			
-						Scene scene = new Scene((Parent)root, 1000, 500); 
+						Scene scene = new Scene((Parent)root, 1000, 725); 
 						stage.setScene(scene);    
 						stage.show();
 						

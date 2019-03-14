@@ -48,6 +48,7 @@ import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.Normalizer.Form;
 import java.io.File;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -67,7 +68,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.Spinner;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.stage.Modality;
@@ -109,13 +109,14 @@ public class FXHomePageController {
     @FXML private Label realnameLabel;
     @FXML private TextField realnameTextfield;
     @FXML private Label ageLabel;
-    @FXML private Spinner<Integer> ageTextfield;
+    @FXML private TextField ageTextfield;
     @FXML private Label emailLabel;
     @FXML private TextField emailTextfield;
     @FXML private TableView childrenTableView;
     @FXML private Label profiletitle;
     @FXML private TableColumn editcolumn;
     @FXML private Button profilebox_savestudentbutton;
+    @FXML private Label message;
     
     // bottom (constant) view
     @FXML private Button gallerySelector;
@@ -175,9 +176,9 @@ public class FXHomePageController {
 				imageLargeNodeList[i].setFitWidth(300);
 				
 				//Create image information for each image
-				imageInfoStrings[i] = ("This is image number: "+i);
-				imageInfoLabels[i] = new Label(imageInfoStrings[i]);
-				imageInfoLabels[i].setStyle("-fx-font-size: 20; -fx-text-fill: Black;");
+				///imageInfoStrings[i] = ("This is image number: "+i);
+				//imageInfoLabels[i] = new Label(imageInfoStrings[i]);
+				//imageInfoLabels[i].setStyle("-fx-font-size: 20; -fx-text-fill: Black;");
 			}
 			
 			
@@ -229,7 +230,7 @@ public class FXHomePageController {
 			passwordTextfield.getText().trim().length() > 0 &&
 			realnameTextfield.getText().trim().length() > 0 &&
 			emailTextfield.getText().trim().length() > 0 &&
-			ageTextfield.getValue() >= 5) {
+			Integer.parseInt(ageTextfield.getText()) >= 5) {
 				Web webObject = new Web();
 				
 				List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -237,7 +238,9 @@ public class FXHomePageController {
 				urlParameters.add(new BasicNameValuePair("password", passwordTextfield.getText().trim()));
 				urlParameters.add(new BasicNameValuePair("realname", realnameTextfield.getText().trim()));
 				urlParameters.add(new BasicNameValuePair("email", emailTextfield.getText().trim()));
-				urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-ageTextfield.getValue())));
+				urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(ageTextfield.getText()))));
+				System.out.println("ageTextfield: "+ ageTextfield.getText());
+				System.out.println("sends: "+ Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(ageTextfield.getText())));
 				WebRequest wr;
 				
 				try {
@@ -261,6 +264,9 @@ public class FXHomePageController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+		}
+		else {
+			message.setText("There was an error in the form.  Please complete all fields");
 		}
 				
 	}
@@ -343,7 +349,7 @@ public class FXHomePageController {
 				passwordTextfield.getText().trim().length() > 0 &&
 				realnameTextfield.getText().trim().length() > 0 &&
 				emailTextfield.getText().trim().length() > 0 &&
-				ageTextfield.getValue() >= 5) {
+				Integer.parseInt(ageTextfield.getText()) >= 5) {
 					Web webObject = new Web();
 					
 					List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -351,8 +357,7 @@ public class FXHomePageController {
 					urlParameters.add(new BasicNameValuePair("password", passwordTextfield.getText().trim()));
 					urlParameters.add(new BasicNameValuePair("realname", realnameTextfield.getText().trim()));
 					urlParameters.add(new BasicNameValuePair("email", emailTextfield.getText().trim()));
-					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-ageTextfield.getValue())));
-					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-ageTextfield.getValue())));
+					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(( ageTextfield).getText()))));
 					urlParameters.add(new BasicNameValuePair("studentid", Integer.toString(selectedStudentId)));
 					WebRequest wr;
 					
@@ -409,10 +414,12 @@ public class FXHomePageController {
 			/* populate the table at the top of the profile page */
 			wr = webObject.makeRequest("http://erostratus.net:5000/myinfo", urlParameters, u.getCookies());
 			if(!wr.hasError()) {
+				profiletitle.setText(wr.getJSON().getAsJsonObject("user").get("username").getAsString());
+				u.setUsername(wr.getJSON().getAsJsonObject("user").get("username").getAsString());
 				u.setRealname(wr.getJSON().getAsJsonObject("user").get("realname").getAsString());
 				u.setEmail(wr.getJSON().getAsJsonObject("user").get("email").getAsString());
-				u.setBorn(Integer.getInteger(wr.getJSON().getAsJsonObject("user").get("born").getAsString()));
-				
+				u.setBorn(Integer.parseInt(wr.getJSON().getAsJsonObject("user").get("born").getAsString()));
+				u.setAge(Calendar.getInstance().get(Calendar.YEAR) - u.getBorn());
 				usernameTextfield.setText(u.getUsername());
 				usernameLabel.setText(u.getUsername());
 				passwordTextfield.setText("");
@@ -421,7 +428,8 @@ public class FXHomePageController {
 				realnameLabel.setText(u.getRealname());
 				emailTextfield.setText(u.getEmail());
 				emailLabel.setText(u.getEmail());
-				
+				ageLabel.setText(Integer.toString(u.getAge()));
+				ageTextfield.setText(Integer.toString(u.getAge()));
 				/*JsonElement children = wr.getJSON().get("children");
 				Type listType = new TypeToken<List<User>>() {}.getType();
 				List<User> childrenList = new Gson().fromJson(children, listType);
@@ -435,10 +443,12 @@ public class FXHomePageController {
 				/* Unfortunately gson has horrible support (see commented out code above) for reading through
 				 * a JSON array, so we're using org.JSON for this limited parsing
 				 */
-				JSONObject jo = new JSONObject(wr.getJSONString());
-				JSONArray ja = jo.getJSONArray("children");
+
+				 JSONObject jo = new JSONObject(wr.getJSONString());
+				 JSONArray ja = jo.getJSONArray("children");
 				
 				ObservableList<User> childUsers = childrenTableView.getItems();
+				childrenTableView.getItems().clear();
 
 				childUsers.removeAll();
 				for(int j = 0; j < ja.length(); j++) {

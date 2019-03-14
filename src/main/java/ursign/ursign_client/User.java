@@ -86,9 +86,16 @@ public class User {
 	public Integer getBorn() {
 		return born;
 	}
+	
+	public void setAge(Integer age) {
+		this.age = age;
+		this.born = Calendar.getInstance().get(Calendar.YEAR) - age;
+
+	}
 
 	public void setBorn(Integer born) {
 		this.born = born;
+		this.age = Calendar.getInstance().get(Calendar.YEAR) - born;
 	}
 
 	public List<Collection> getCollections() {
@@ -127,13 +134,10 @@ public class User {
 		return login_complete;
 	}
 	
-	public void setAge(Integer age) {
-		this.age = age;
-		this.born = Calendar.getInstance().get(Calendar.YEAR) - age;
-	}
 	
 	public Integer getAge() {
 		return age;
+
 	}
 
 }

@@ -100,8 +100,8 @@
 											        
 											    <Label text="Age:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-											 	<Label text="21" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="AgeLabel" />
-											    <Spinner GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false" min="0" max="100" initialValue="30" editable="true" fx:id="ageTextfield" />
+											 	<Label text="21" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="ageLabel" />
+											    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false" fx:id="ageTextfield" />
 											        
 											    <Label text="E-mail:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="5"/>
@@ -148,7 +148,7 @@
 							          </columns>    
 							          <items>
 							              <FXCollections fx:factory="observableArrayList">
-							                  <User username="test" uid="1" email="x" realname="y" age="21"/>
+							                  
 							                  
 							              </FXCollections>
 							          </items>
@@ -159,6 +159,11 @@
 							     </children>
 							     </VBox>
 					    	</HBox>
+					    	<Label fx:id="message">
+		                    <font>
+		                        <Font name="Calibri" size="30.0" />
+		                    </font>
+		                </Label>
 					    </children>
 					   </VBox>
 					    </center>
@@ -223,6 +228,7 @@
                  	<Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
                  </HBox>
                  </children>
+                 		   
                  </VBox>
 						</bottom>
 				</BorderPane>
