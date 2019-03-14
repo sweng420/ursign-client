@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.Event;
+import javafx.scene.control.TableColumn;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -71,12 +73,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.stage.Modality;
 import javafx.collections.ObservableList;
 import javafx.beans.binding.Bindings;
-import org.JSON;
+//import org.JSON;
 
 import java.util.Calendar;
 
 public class FXHomePageController {
 	private User u;
+	private Integer selectedStudentId;
     @FXML private Text actiontarget;
     
     // gallerybox view
@@ -111,6 +114,8 @@ public class FXHomePageController {
     @FXML private TextField emailTextfield;
     @FXML private TableView childrenTableView;
     @FXML private Label profiletitle;
+    @FXML private TableColumn editcolumn;
+    @FXML private Button profilebox_savestudentbutton;
     
     // bottom (constant) view
     @FXML private Button gallerySelector;
@@ -194,7 +199,7 @@ public class FXHomePageController {
 			Node root = fxmlLoader.load();			
 			Scene scene = new Scene((Parent)root, 1000, 500);
 			stage.setScene(scene);
-			stage.setTitle("My modal window");
+			stage.setTitle("Register Student");
 		    stage.initModality(Modality.WINDOW_MODAL);
 		    stage.initOwner(
 		        ((Node)event.getSource()).getScene().getWindow() );
@@ -262,22 +267,18 @@ public class FXHomePageController {
 	
 	
 	@FXML protected void handleProfileMyStudents(ActionEvent event) {
+		
 	}
 	
 	@FXML protected void handleSelectProfile(ActionEvent event) {
 		gallerybox_controlbox.setVisible(false);
 		profilebox_controlbox.setVisible(true);
-		//gallerybox.setVisible(false);
-		//profilebox.setVisible(true);
-		//galleryTitleBox.setVisible(false);
-		//profileTitleBox.setVisible(true);
 	}
 	
 	@FXML
     void event(Event ev) {
         if (gallerytab.isSelected()) {
             System.out.println("Tab is Selected");
-            //Do stuff here
         }
     }
 	
@@ -287,13 +288,6 @@ public class FXHomePageController {
 		gallerybox_slideshowbutton.setDisable(false);
 		gallerybox_gallerybutton.setDisable(true);
 		gallerybox_borderpane.setRight(null);
-		
-		//gallerybox.setVisible(true);
-		//profilebox.setVisible(false);
-		//gallerybox_controlbox.setVisible(true);
-		//profilebox_controlbox.setVisible(false);
-		//galleryTitleBox.setVisible(true);
-		//profileTitleBox.setVisible(false);
 	}
 	@FXML protected void handleGalleryNext(ActionEvent event) {
 		if (gridLastNodeIndex != imageGalleryNodeList.length && inSlideShow == false){
@@ -344,6 +338,50 @@ public class FXHomePageController {
 	    }
 	}
 	
+	@FXML protected void handleSaveStudent(ActionEvent event) {
+		if(usernameTextfield.getText().trim().length() > 0 &&
+				passwordTextfield.getText().trim().length() > 0 &&
+				realnameTextfield.getText().trim().length() > 0 &&
+				emailTextfield.getText().trim().length() > 0 &&
+				ageTextfield.getValue() >= 5) {
+					Web webObject = new Web();
+					
+					List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+					urlParameters.add(new BasicNameValuePair("username", usernameTextfield.getText().trim()));
+					urlParameters.add(new BasicNameValuePair("password", passwordTextfield.getText().trim()));
+					urlParameters.add(new BasicNameValuePair("realname", realnameTextfield.getText().trim()));
+					urlParameters.add(new BasicNameValuePair("email", emailTextfield.getText().trim()));
+					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-ageTextfield.getValue())));
+					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-ageTextfield.getValue())));
+					urlParameters.add(new BasicNameValuePair("studentid", Integer.toString(selectedStudentId)));
+					WebRequest wr;
+					
+					try {
+						wr = webObject.makeRequest("http://erostratus.net:5000/updatestudentinfo", urlParameters, u.getCookies());
+						if(!wr.hasError()) {
+							for (Node child : labels_fields.getChildren()) {
+					            if(GridPane.getColumnIndex(child) == 1){
+					            	child.setVisible(!child.isVisible());
+					            }
+					        }
+							
+							/* re-init the parent profile */
+							initialize_profile();
+							
+							profilebox_savebutton.setVisible(false);
+							profilebox_editbutton.setVisible(true);
+							profilebox_savestudentbutton.setVisible(false);
+							
+						} else {
+							System.out.println(wr.getError());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+			}
+					
+		}	
+	
 
 	private void initialize_profile() {
 		profiletitle.setText(u.getUsername());
@@ -384,9 +422,6 @@ public class FXHomePageController {
 				emailTextfield.setText(u.getEmail());
 				emailLabel.setText(u.getEmail());
 				
-				//ageLabel.setText(Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-u.getBorn()));
-				//ageTextfield.getValueFactory().setValue(Calendar.getInstance().get(Calendar.YEAR)-u.getBorn());
-
 				/*JsonElement children = wr.getJSON().get("children");
 				Type listType = new TypeToken<List<User>>() {}.getType();
 				List<User> childrenList = new Gson().fromJson(children, listType);
@@ -418,6 +453,33 @@ public class FXHomePageController {
 				childrenTableView.setFixedCellSize(25);
 				childrenTableView.prefHeightProperty().bind(Bindings.size(childrenTableView.getItems()).multiply(childrenTableView.getFixedCellSize()).add(30));
 				
+				editcolumn.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User student) -> {
+				    /*childrenTableView.getItems().remove(u);
+				    return u;*/
+					System.out.println("Editing "+student.getUsername());
+					profiletitle.setText("Editing: "+student.getUsername());
+					profilebox_savestudentbutton.setVisible(true);
+					selectedStudentId = student.getUid();
+					
+					
+					usernameTextfield.setText(student.getUsername());
+					usernameLabel.setText(student.getUsername());
+					passwordTextfield.setText("");
+					passwordLabel.setText("*****");
+					realnameTextfield.setText(student.getRealname());
+					realnameLabel.setText(student.getRealname());
+					emailTextfield.setText(student.getEmail());
+					emailLabel.setText(student.getEmail());
+					
+					for (Node child : labels_fields.getChildren()) {
+			            if(GridPane.getColumnIndex(child) == 1){
+			            	child.setVisible(!child.isVisible());
+			            }
+			        }
+					
+					return student;
+				}));    
+				
 			} else {
 				System.out.println(wr.getError());
 			}
@@ -427,24 +489,8 @@ public class FXHomePageController {
 	}
 	
 	public void initialize() {
-		System.out.println("!!");
 		initialize_gallery();
-		initialize_profile();
-		
-		//galleryTitleBox.setVisible(false);
-		//gallerybox_controlbox.setVisible(false);
-		
-		/*tabpane.getSelectionModel().selectedItemProperty().addListener(
-			    new ChangeListener<Tab>() {
-			        //@Override
-			        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-			            System.out.println(t.idProperty());
-			        }
-			    }
-			);*/
-		
-		//titleStackPane.getChildren().remove(0);
-		
+		initialize_profile();		
 	}
 	
 	public void fillGrid(int start){

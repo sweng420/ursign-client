@@ -137,10 +137,13 @@
 							                      <PropertyValueFactory property="email" />
 							                  </cellValueFactory>
 							              </TableColumn>
-							              <TableColumn text="Age" prefWidth="200">
+							              <TableColumn text="Age" prefWidth="50">
 							                  <cellValueFactory>
 							                      <PropertyValueFactory property="age" />
 							                  </cellValueFactory>
+							              </TableColumn>
+							              <TableColumn text="Edit" prefWidth="100" fx:id="editcolumn">
+							                  
 							              </TableColumn>
 							          </columns>    
 							          <items>
@@ -168,6 +171,7 @@
 		                 				<Button fx:id="profilebox_editbutton" text="Edit Profile" underline="true" onAction="#handleProfileEdit"></Button>
 		                 				<Button fx:id="profilebox_registerstudentbutton" text="Register Student" underline="true" onAction="#handleRegisterStudent"></Button>
 		                 				<!--<Button fx:id="profilebox_mystudentbutton" text="My Students" underline="true" onAction="#handleProfileMyStudents"></Button>-->
+						 				<Button fx:id="profilebox_savestudentbutton" text="Save Student" underline="true" visible="false" onAction="#handleSaveStudent"></Button>
 						 			</HBox>
 						 		</children>
 						 	</VBox>

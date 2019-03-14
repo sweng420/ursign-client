@@ -36,6 +36,10 @@ public class FXRegisterController {
         this(0);
     }
 	
+    @FXML public void initialize() {
+    	
+    }
+    
 	@FXML protected void handleRegister(ActionEvent event) {
 		if(usernameTextfield.getText().trim().length() > 0 &&
 			passwordTextfield.getText().trim().length() > 0 &&
