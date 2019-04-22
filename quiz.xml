@@ -1,0 +1,33 @@
+<quiz id = "2">
+  <name>Alphabet Quiz</name>
+  <questions>
+    <question type="multiple" correct="a" index = "0">
+      <content>
+	    <multimedia>
+	      <text>Which letter is shown below?</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>...</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>A</text></multimedia></answer>
+      <answer id="h"><multimedia><text>H</text></multimedia></answer>
+      <answer id="y"><multimedia><text>Y</text></multimedia></answer>
+    </question>
+
+    <question type="fill" index = "1">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>...</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>Hello</text></multimedia></answer>
+      <answer id="h"><multimedia><text>Hi</text></multimedia></answer>
+      <answer id="y"><multimedia><text>""Howdy""</text></multimedia></answer>
+    </question>
+
+  </questions>
+</quiz>
