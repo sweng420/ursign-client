@@ -86,7 +86,7 @@ public class FXSplashController {
     	    	
     			WebRequest wr;
 				try {
-					wr = webObject.makeRequest("http://erostratus.net:5000/login", urlParameters, new ArrayList<Cookie>());
+					wr = webObject.makeRequest("/login", urlParameters, new ArrayList<Cookie>());
 					
 					if(!wr.hasError()){
 						System.out.println(Integer.decode(wr.getJSON().get("userid").toString()));

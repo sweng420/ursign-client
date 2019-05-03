@@ -63,13 +63,14 @@ public class FXRegisterController {
 				WebRequest wr;
 				
 				try {
-					wr = webObject.makeRequest("http://erostratus.net:5000/register", urlParameters, new ArrayList<Cookie>());
+					wr = webObject.makeRequest("/register", urlParameters, new ArrayList<Cookie>());
 					if(!wr.hasError()) {
 						System.out.println(wr.getJSON().toString());
 						if(parentid > 0) {
 							((Node)(event.getSource())).getScene().getWindow().hide();
 						}
 						else {
+							/* we've just registered a new non-child account, so log into it */
 								String uname = usernameTextfield.getText();
 					    			String password = passwordTextfield.getText();
 					    			
@@ -80,7 +81,7 @@ public class FXRegisterController {
 					    			urlParameters.add(new BasicNameValuePair("password", password));
 
 									try {
-										wr = webObject.makeRequest("http://erostratus.net:5000/login", urlParameters, new ArrayList<Cookie>());
+										wr = webObject.makeRequest("/login", urlParameters, new ArrayList<Cookie>());
 										
 										if(!wr.hasError()){
 											System.out.println(Integer.decode(wr.getJSON().get("userid").toString()));

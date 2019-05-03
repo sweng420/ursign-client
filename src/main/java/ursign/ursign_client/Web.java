@@ -26,6 +26,13 @@ import com.google.gson.JsonParser;
 public class Web {
 	private HttpResponse response;
 	public WebRequest makeRequest(String url, List<NameValuePair> parameters, List<Cookie> cookies) throws Exception {
+		if(!url.startsWith("http")) {
+			// no http; assume we want to request a path on the urSign server.
+			if(!url.startsWith("/")) {
+				throw new IllegalArgumentException("Bad path specified.");
+			}
+			url = "http://heraclitean.club"+url;
+		}
 		String err;
 		CookieStore httpCookieStore = new BasicCookieStore();
 		for(Cookie c : cookies) {

@@ -244,7 +244,7 @@ public class FXHomePageController {
 				WebRequest wr;
 				
 				try {
-					wr = webObject.makeRequest("http://erostratus.net:5000/updateinfo", urlParameters, u.getCookies());
+					wr = webObject.makeRequest("/updateinfo", urlParameters, u.getCookies());
 					if(!wr.hasError()) {
 						for (Node child : labels_fields.getChildren()) {
 				            if(GridPane.getColumnIndex(child) == 1){
@@ -362,7 +362,7 @@ public class FXHomePageController {
 					WebRequest wr;
 					
 					try {
-						wr = webObject.makeRequest("http://erostratus.net:5000/updatestudentinfo", urlParameters, u.getCookies());
+						wr = webObject.makeRequest("/updatestudentinfo", urlParameters, u.getCookies());
 						if(!wr.hasError()) {
 							for (Node child : labels_fields.getChildren()) {
 					            if(GridPane.getColumnIndex(child) == 1){
@@ -412,7 +412,7 @@ public class FXHomePageController {
 		System.out.println(getUser().getUsername());
 		try {
 			/* populate the table at the top of the profile page */
-			wr = webObject.makeRequest("http://erostratus.net:5000/myinfo", urlParameters, u.getCookies());
+			wr = webObject.makeRequest("/myinfo", urlParameters, u.getCookies());
 			if(!wr.hasError()) {
 				profiletitle.setText(wr.getJSON().getAsJsonObject("user").get("username").getAsString());
 				u.setUsername(wr.getJSON().getAsJsonObject("user").get("username").getAsString());
