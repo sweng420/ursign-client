@@ -10,22 +10,25 @@ import org.w3c.dom.Element;
 
 public class CollectionParser {
 
-	private Presentation presentation = new Presentation(0);
-
+	private String source;
+	private Presentation presentation;
+	CollectionParser(String src) {
+		this.source = src;
+	}
 
 	public Presentation getPresentation() {
 		return presentation;
 	}
 	
-   public void parse(String source) {
-	  
+   public void parse() {
+	  presentation = new Presentation(0);
       try {
          File inputFile = new File(source);
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
          Document doc = dBuilder.parse(inputFile);
          doc.getDocumentElement().normalize();
-         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+         //System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
          
          int id;	//pass id to "id" 
          try {
@@ -37,22 +40,22 @@ public class CollectionParser {
          presentation.setID(id);
          
          NodeList nList = doc.getElementsByTagName("page");
-         System.out.println("----------------------------");
+         //System.out.println("----------------------------");
          Page p = new Page();
          for (int temp = 0; temp < nList.getLength(); temp++) {
             Node nNode = nList.item(temp);
-            System.out.println("\nCurrent Element :" + nNode.getNodeName());
-            System.out.println("new page" + nList.getLength());
+            //System.out.println("\nCurrent Element :" + nNode.getNodeName());
+            //System.out.println("new page" + nList.getLength());
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                Element eElement = (Element) nNode;
 
                NodeList mList = eElement.getElementsByTagName("multimedia");
-               System.out.println("----------------------------");
+               //System.out.println("----------------------------");
                p = null;
                p = new Page();
                
                //MULTIMEDIA
-               System.out.println("mlist length::"+mList.getLength());
+               //System.out.println("mlist length::"+mList.getLength());
                for (int m_temp = 0; m_temp < mList.getLength(); m_temp++) {
                   Node mNode = mList.item(m_temp);
                   if(mNode != null) {
@@ -74,7 +77,7 @@ public class CollectionParser {
                   }
                }
 
-               System.out.println(p);
+               //System.out.println(p);
                presentation.addPage(p);
             }
          }

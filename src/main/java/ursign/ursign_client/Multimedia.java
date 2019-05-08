@@ -26,7 +26,7 @@ public class Multimedia {
 		this.filelocation=filelocation;
 	}
 	public String toString() {
-		return "Type: "+type+"\nLocation:"+filelocation+"\nStyle:"+style;
+		return "Multimedia {Type: "+type+"\nLocation:"+filelocation+"\nStyle:"+style+"}";
 	}
 	
 }
