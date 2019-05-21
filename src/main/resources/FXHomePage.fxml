@@ -183,7 +183,8 @@
 					    </bottom>
 				    </BorderPane>
 			</Tab>
-			
+			<Tab text="Quiz" fx:id="quiztab">
+			</Tab>
 			<Tab text="Gallery" fx:id="gallerytab">
 				<BorderPane>
 				<top>

@@ -38,13 +38,13 @@
          <children>
             <VBox alignment="CENTER_LEFT" layoutX="70.0" layoutY="58.0" maxWidth="400.0" minWidth="200.0" prefWidth="280.0" spacing="5.0">
                <children>
-                  <Label text="Username">
+                  <Label styleClass="formLabelText" text="Username">
                      <VBox.margin>
                         <Insets left="5.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="usernameTextfield" />
-                  <Label text="Password">
+                  <Label styleClass="formLabelText" text="Password">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
