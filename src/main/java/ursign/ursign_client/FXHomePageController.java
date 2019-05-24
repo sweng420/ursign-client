@@ -500,7 +500,19 @@ public class FXHomePageController {
 	
 	public void initialize() {
 		initialize_gallery();
-		initialize_profile();		
+		initialize_profile();
+
+        for (int i = 0; i < 5; i++) {
+            Tab tab = new Tab();
+            tab.setText("Tab" + i);
+            HBox hbox = new HBox();
+            hbox.getChildren().add(new Label("Tab" + i));
+            hbox.setAlignment(Pos.CENTER);
+            tab.setContent(hbox);
+            tabpane.getTabs().add(tab);
+        }
+
+
 	}
 	
 	public void fillGrid(int start){

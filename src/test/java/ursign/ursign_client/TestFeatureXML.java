@@ -14,7 +14,7 @@ public class TestFeatureXML {
 		cp = new CollectionParser("colours2.xml");
 		cp.parse();
 		System.out.println(cp.getPresentation());
-		
+		System.out.println(cp.getPresentation().getPages().size());
 		assertEquals(cp.getPresentation().getPages().size(), 4);
 		//assertEquals(cp.getPresentation().getPages().get(0), )
 	}
