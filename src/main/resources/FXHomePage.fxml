@@ -185,6 +185,9 @@
 			</Tab>
 			<Tab text="Quiz" fx:id="quiztab">
 			</Tab>
+			<Tab fx:id="Phrasebook" text="Phrasebook">
+            	<fx:include source="FXPhrasebook.fxml"></fx:include>
+        	</Tab>
 			<Tab text="Gallery" fx:id="gallerytab">
 				<BorderPane>
 				<top>

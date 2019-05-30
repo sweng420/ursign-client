@@ -28,6 +28,18 @@
       <answer id="h"><multimedia><text>Hi</text></multimedia></answer>
       <answer id="y"><multimedia><text>""Howdy""</text></multimedia></answer>
     </question>
+    
+    <question type="anki" index = "2">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	      
+	    </multimedia>
+	    <multimedia>
+	      <video>family.mp4</video>
+	    </multimedia>
+      </content>
+    </question>
 
   </questions>
 </quiz>

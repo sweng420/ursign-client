@@ -516,7 +516,6 @@ public class FXHomePageController {
 	}
 	
 	public void fillGrid(int start){
-		
 		for (int j = 0; j < 3; j++){
 			for (int k = 0; k < 3; k++){
 				gallerybox_imagegrid.add(imageGalleryNodeList[start], k, j);

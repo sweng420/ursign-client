@@ -15,7 +15,7 @@ public class TestFeatureXML {
 		cp.parse();
 		System.out.println(cp.getPresentation());
 		System.out.println(cp.getPresentation().getPages().size());
-		assertEquals(cp.getPresentation().getPages().size(), 4);
+		assertEquals(cp.getPresentation().getPages().size(), 3);
 		//assertEquals(cp.getPresentation().getPages().get(0), )
 	}
 	
