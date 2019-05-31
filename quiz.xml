@@ -7,7 +7,7 @@
 	      <text>Which letter is shown below?</text>
 	    </multimedia>
 	    <multimedia>
-	      <image>...</image>
+	      <image>A.jpg</image>
 	    </multimedia>
       </content>
       <answer id="a"><multimedia><text>A</text></multimedia></answer>
@@ -21,7 +21,7 @@
 	      <text>The person is signing _____</text>
 	    </multimedia>
 	    <multimedia>
-	      <image>...</image>
+	      <image>hello.jpg</image>
 	    </multimedia>
       </content>
       <answer id="a"><multimedia><text>Hello</text></multimedia></answer>
@@ -32,13 +32,14 @@
     <question type="anki" index = "2">
       <content>
 	    <multimedia>
-	      <text>The person is signing _____</text>
-	      
-	    </multimedia>
-	    <multimedia>
-	      <video>family.mp4</video>
+	      <text>Can you sign the word for 'family'</text>
 	    </multimedia>
       </content>
+	    <answer id="family">
+		    <multimedia>
+	      		<video>family.mp4</video>
+	    	    <multimedia>
+	    </answer>
     </question>
 
   </questions>
