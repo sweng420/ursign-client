@@ -194,58 +194,70 @@ public class Player extends BorderPane {
 	     * 
 	     */
 	    private void initializeImageView() {
-	        writable_image = new WritableImage(screen_width, screen_height);
+	    	//YSS EDIT
+	        //
+	        //Added different canvasComponent constructor based on state variable with
+	    	// listeners only initialised for videoTab state
+	        //
+	        //YSS EDIT
+	        // Create the actual VLC player
+	        if (state == 1){
+	        	writable_image = new WritableImage(screen_width, screen_height);
+	        	image_view = new ImageView(writable_image);
+		        getPlayer_holder().getChildren().add(image_view);
+	        	// Add listners for size of screen changing
+		        getPlayer_holder().widthProperty().addListener((observable, oldValue, newValue) -> {
+		        	   Platform.runLater(new Runnable() {
+		        		    @Override
+		        		        public void run() {
+		        		            // draw stuff
+		        		    	fitImageViewSize(newValue.floatValue(), (float) getPlayer_holder().getHeight());	            
+		        		        }
+		        		    });
+		            
+			    	try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-	        image_view = new ImageView(writable_image);
-	        getPlayer_holder().getChildren().add(image_view);
-	        
-	        // Add listners for size of screen changing
-	        getPlayer_holder().widthProperty().addListener((observable, oldValue, newValue) -> {
-	        	   Platform.runLater(new Runnable() {
-	        		    @Override
-	        		        public void run() {
-	        		            // draw stuff
-	        		    	fitImageViewSize(newValue.floatValue(), (float) getPlayer_holder().getHeight());	            
-	        		        }
-	        		    });
-	            
-		    	try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		        });
 
-	        });
+		        getPlayer_holder().heightProperty().addListener((observable, oldValue, newValue) -> {
+		        	   Platform.runLater(new Runnable() {
+		        		    @Override
+		        		        public void run() {
+		        		            // draw stuff
+		        		    		fitImageViewSize((float) getPlayer_holder().getWidth(), newValue.floatValue());
 
-	        getPlayer_holder().heightProperty().addListener((observable, oldValue, newValue) -> {
-	        	   Platform.runLater(new Runnable() {
-	        		    @Override
-	        		        public void run() {
-	        		            // draw stuff
-	        		    		fitImageViewSize((float) getPlayer_holder().getWidth(), newValue.floatValue());
-
-	        		        }
-	        		    });
-	            
-		    	try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	            
-	        });
-	        // Add listner for video ratio changing
-	        video_source_ratio_property.addListener((observable, oldValue, newValue) -> {
-	        	   Platform.runLater(new Runnable() {
-	        		    @Override
-	        		        public void run() {
-	        		    	fitImageViewSize((float) getPlayer_holder().getWidth(), (float) getPlayer_holder().getHeight());
-	        		        }
-	        		    });
-	           
-	        });
+		        		        }
+		        		    });
+		            
+			    	try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		            
+		        });
+		        // Add listner for video ratio changing
+		        video_source_ratio_property.addListener((observable, oldValue, newValue) -> {
+		        	   Platform.runLater(new Runnable() {
+		        		    @Override
+		        		        public void run() {
+		        		    	fitImageViewSize((float) getPlayer_holder().getWidth(), (float) getPlayer_holder().getHeight());
+		        		        }
+		        		    });
+		           
+		        });
+	        }
+	        else if(state == 0){
+	        	writable_image = new WritableImage(window_width, window_height);
+	        	image_view = new ImageView(writable_image);
+		        getPlayer_holder().getChildren().add(image_view);
+	        }
 	    }
 	    
 	    /**

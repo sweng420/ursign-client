@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.Event;
@@ -64,6 +66,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Separator;
@@ -137,12 +140,14 @@ public class FXHomePageController {
     @FXML private Tab profiletab;
     @FXML private Tab gallerytab;
     @FXML private FXPhrasebookController phrasebookIncludeController;
-	
-    private Image imageList[] = new Image[26];
-    private ImageView imageGalleryNodeList[] = new ImageView[26];
-    private ImageView imageLargeNodeList[] = new ImageView[26];
-    private String[] imageInfoStrings = new String[26];
-    private Label[] imageInfoLabels = new Label[26];
+    
+    
+	private int numOfImages = 43;
+    private Image imageList[] = new Image[numOfImages];
+    private ImageView imageGalleryNodeList[] = new ImageView[numOfImages];
+    private ImageView imageLargeNodeList[] = new ImageView[numOfImages];
+    private String[] imageInfoStrings = new String[numOfImages];
+    private Label[] imageInfoLabels = new Label[numOfImages];
 	private File imageFiles;
 	private int gridStartIndex = 0;
 	private int gridLastNodeIndex;
@@ -164,24 +169,44 @@ public class FXHomePageController {
     }
 	
 	private void initialize_gallery() {
+		
+		//Instantiating the Shadow class 
+	    DropShadow dropShadow = new DropShadow(); 
+	    //setting the type of blur for the shadow 
+	    dropShadow.setBlurType(BlurType.GAUSSIAN); 
+	    //Setting colour for the shadow 
+	    dropShadow.setColor(Color.BLACK); 
+	    //Setting the height of the shadow
+	    dropShadow.setHeight(5); 
+	    //Setting the width of the shadow 
+	    dropShadow.setWidth(5); 
+	    //Setting the radius of the shadow 
+	    dropShadow.setRadius(5); 
+	    //setting the offset of the shadow 
+	    dropShadow.setOffsetX(3); 
+	    dropShadow.setOffsetY(2); 
+	    //Setting the spread of the shadow 
+	    dropShadow.setSpread(12); 
 
 		try {
-			for (int i = 0; i < 26; i++){
+			for (int i = 0; i < numOfImages; i++){
 				//Folder "image" is in project folder
-				imageFiles = new File("images/"+i+".jpg");
+				imageFiles = new File("Resources/imagesGallery/"+i+".png");
 				imageList[i] = new Image("file:"+imageFiles.getAbsolutePath());
 				System.out.println(imageFiles.getAbsolutePath());
 				
 				//Create list of ImageView nodes of size 100x100 for image gallery
 				imageGalleryNodeList[i] = new ImageView(imageList[i]);
-				imageGalleryNodeList[i].setPreserveRatio(false);
+				imageGalleryNodeList[i].setPreserveRatio(true);
 				imageGalleryNodeList[i].setFitWidth(150);
 				imageGalleryNodeList[i].setFitHeight(150);
+				imageGalleryNodeList[i].setEffect(dropShadow);
 				
 				//Create list of ImageView nodes with image ratio preserved and 300 width
 				imageLargeNodeList[i] = new ImageView(imageList[i]);
 				imageLargeNodeList[i].setPreserveRatio(true);
 				imageLargeNodeList[i].setFitWidth(300);
+				imageLargeNodeList[i].setEffect(dropShadow);
 				
 				//Create image information for each image
 				///imageInfoStrings[i] = ("This is image number: "+i);

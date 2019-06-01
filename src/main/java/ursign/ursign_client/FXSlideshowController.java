@@ -137,8 +137,8 @@ public class FXSlideshowController {
 
 				//Load videos
 				vidplayer.loadPaths(paths);
-				vidplayer.setMaxHeight(vidplayer.getHeight());
-				vidplayer.setMaxWidth(vidplayer.getWidth());
+				vidplayer.setMaxHeight(canvas.getHeight());
+				vidplayer.setMaxWidth(canvas.getWidth());
 				
 				videoBox.getChildren().add(vidplayer);
 				

@@ -10,7 +10,7 @@
             prefHeight="400.0" prefWidth="600.0">
 
    <Label text=" This is Tab 1 " translateX="10"></Label>
-   <BorderPane prefHeight="100.0" prefWidth="600.0"  fx:id="rootBorderPane">
+   <BorderPane prefHeight="600.0" prefWidth="600.0"  fx:id="rootBorderPane">
    	<bottom>
 		<VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
            <children>
