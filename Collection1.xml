@@ -1,29 +1,30 @@
 <id value = "2">
 	<page>  <!--red-->
-		<multimedia>
-			<type>Image</type>
-			<filelocation>Colours_media/red.png</filelocation>
+		<multimedia row="1">
+			<type>Video</type>
+			<filelocation>images/hello.mp4</filelocation>
 			<meta>		
 			</meta>
 		</multimedia>
     
-		<multimedia>
-			<type>Text</type>
-			<filelocation>red</filelocation>
+		<multimedia row="1">
+			<type>Audio</type>
+			<filelocation>images/piano2.wav</filelocation>
 			<meta>
 			</meta>
 		</multimedia>
 	</page>
   
   	<page>  <!--green-->
-		<multimedia>
+		<multimedia row="1">
 			<type>Image</type>
-			<filelocation>Colours_media/green.png</filelocation>
-			 <meta>	
+			<filelocation>images/1.jpg</filelocation>
+			 <meta>
+			 	<newrow>true</newrow>
 			 </meta>
 		</multimedia>
     
-		<multimedia>
+		<multimedia row="1">
 			<type>Text</type>
 			<filelocation>green</filelocation>
 			<meta>
@@ -32,20 +33,20 @@
 	</page>
   
   	<page>  <!--blue-->
-		<multimedia>
+		<multimedia row="1">
 			<type>Image</type>
-			<filelocation>Colours_media/blue.png</filelocation>
+			<filelocation>images/2.jpg</filelocation>
 			<meta>
 				<duration></duration>
 			</meta>
 		</multimedia>
     
-		<multimedia>
+		<multimedia row="2">
 			<type>Text</type>
 			<filelocation>blue</filelocation>
 			
 			<meta>
-				<style>-fx-text-fill: green; -fx-font-size: 16px;</style>
+				<style>-fx-stroke: green; -fx-font-size: 16px;</style>
 			</meta>
 		</multimedia>
 		

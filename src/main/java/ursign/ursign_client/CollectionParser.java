@@ -1,6 +1,14 @@
 package ursign.ursign_client;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import ursign.ursign_client.Util;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -54,28 +62,7 @@ public class CollectionParser {
                p = null;
                p = new Page();
                
-               //MULTIMEDIA
-               //System.out.println("mlist length::"+mList.getLength());
-               for (int m_temp = 0; m_temp < mList.getLength(); m_temp++) {
-                  Node mNode = mList.item(m_temp);
-                  if(mNode != null) {
-	                  if (mNode.getNodeType() == Node.ELEMENT_NODE) {
-	                      Element mElement = (Element) mNode;
-	                      Node styleNode = mElement.getElementsByTagName("style").item(0);
-	                      String styleString;
-	                      if(styleNode == null) {
-	                    	  styleString = "";
-	                      } else {
-	                    	  styleString = styleNode.getTextContent();
-	                      }
-		                  p.addMultimedia(new Multimedia(
-		                		  mElement.getElementsByTagName("type").item(0).getTextContent(),
-		                		  mElement.getElementsByTagName("filelocation").item(0).getTextContent(),
-		                		  styleString
-		                		  ));
-	                  }
-                  }
-               }
+               p.setMultimedias(Util.parseMultimedias(mList));
 
                //System.out.println(p);
                presentation.addPage(p);

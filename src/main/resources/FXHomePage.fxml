@@ -186,7 +186,13 @@
 			<Tab text="Quiz" fx:id="quiztab">
 			</Tab>
 			<Tab fx:id="Phrasebook" text="Phrasebook">
-            	<fx:include source="FXPhrasebook.fxml"></fx:include>
+            	<fx:include source="FXPhrasebook.fxml" fx:id="phrasebookInclude"></fx:include>
+        	</Tab>
+        	<Tab fx:id="Slideshow" text="Slideshow">
+        		<fx:include source="FXSlideshow.fxml"></fx:include>
+        	</Tab>
+        	<Tab fx:id="videoPlayer" text="Video">
+        		<fx:include fx:id="videoInclude" source="FXVideoPlayer.fxml"></fx:include>
         	</Tab>
 			<Tab text="Gallery" fx:id="gallerytab">
 				<BorderPane>
@@ -205,36 +211,35 @@
 		            </children>
 		        	</VBox>
 				</top>
-						<center>
-							<HBox spacing="10" alignment="center" fx:id="gallerybox">
-							        <BorderPane fx:id="gallerybox_borderpane">
-							        	<center>
-								        	<GridPane fx:id="gallerybox_imagegrid" alignment="center" vgap="15" hgap="15" onMouseClicked="#clickGalleryGrid">
-								        		
-								        	</GridPane>
-								        	
-								        	<HBox spacing="10" alignment="center" fx:id="gallerybox_bigimagebox">
-								        	
-								        	</HBox>
-							        	</center>
-				
-									</BorderPane>
-								</HBox>
-						</center>
-						<bottom>
-							<VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
-            <children>
-                <Separator prefWidth="200.0" fx:id="extraControlsSep"  />
-                 <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="gallerybox_controlbox">
-					<Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
-					<Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
-					<Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
-                 	<Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
-                 </HBox>
-                 </children>
-                 		   
-                 </VBox>
-						</bottom>
+				<center>
+					<HBox spacing="10" alignment="center" fx:id="gallerybox">
+					        <BorderPane fx:id="gallerybox_borderpane">
+					        	<center>
+						        	<GridPane fx:id="gallerybox_imagegrid" alignment="center" vgap="15" hgap="15" onMouseClicked="#clickGalleryGrid">
+						        		
+						        	</GridPane>
+						        	
+						        	<HBox spacing="10" alignment="center" fx:id="gallerybox_bigimagebox">
+						        	
+						        	</HBox>
+					        	</center>
+		
+							</BorderPane>
+						</HBox>
+				</center>
+				<bottom>
+					<VBox prefHeight="50.0" BorderPane.alignment="BOTTOM_CENTER">
+		            <children>
+		                <Separator prefWidth="200.0" fx:id="extraControlsSep"  />
+		                 <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="gallerybox_controlbox">
+							<Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
+							<Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
+							<Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
+		                 	<Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
+		                 </HBox>
+		                 </children>		   
+		              </VBox>
+				</bottom>
 				</BorderPane>
 			</Tab>
 		</TabPane>

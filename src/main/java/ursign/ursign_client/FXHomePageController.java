@@ -51,6 +51,7 @@ import java.nio.file.Paths;
 import java.text.Normalizer.Form;
 import java.io.File;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -74,13 +75,16 @@ import javafx.stage.Modality;
 import javafx.collections.ObservableList;
 import javafx.beans.binding.Bindings;
 //import org.JSON;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.Calendar;
 
 public class FXHomePageController {
 	private User u;
 	private Integer selectedStudentId;
-    @FXML private Text actiontarget;
+	
+	@FXML private Text actiontarget;
     
     // gallerybox view
     @FXML private HBox gallerybox;
@@ -132,6 +136,7 @@ public class FXHomePageController {
     @FXML private TabPane tabpane;
     @FXML private Tab profiletab;
     @FXML private Tab gallerytab;
+    @FXML private FXPhrasebookController phrasebookIncludeController;
 	
     private Image imageList[] = new Image[26];
     private ImageView imageGalleryNodeList[] = new ImageView[26];
@@ -144,15 +149,18 @@ public class FXHomePageController {
 	private int gridNodeIndex;
 	private boolean inSlideShow = false;
 	private int currentSlideNode = 0;
+	private Stage myStage;
 	
 	private Path dataDirectory = Paths.get(System.getProperty("user.home"), ".YSS", "ursign");
 	
-	public FXHomePageController(User given_user) {
+	public FXHomePageController(User given_user, Stage stage) {
         this.u = given_user ;
+        this.myStage = stage;
+        System.out.println(myStage);
     }
 
-    public FXHomePageController() {
-        this(new User());
+    public FXHomePageController(Stage myStage) {
+        this(new User(), myStage);
     }
 	
 	private void initialize_gallery() {
@@ -499,6 +507,7 @@ public class FXHomePageController {
 	}
 	
 	public void initialize() {
+		
 		initialize_gallery();
 		initialize_profile();
 
@@ -511,9 +520,11 @@ public class FXHomePageController {
             tab.setContent(hbox);
             tabpane.getTabs().add(tab);
         }
+        
+        phrasebookIncludeController.seth(1111);
+        }
 
-
-	}
+	
 	
 	public void fillGrid(int start){
 		for (int j = 0; j < 3; j++){
@@ -562,4 +573,6 @@ public class FXHomePageController {
     public User getUser() {
     	return u;
     }
+
+   
 }

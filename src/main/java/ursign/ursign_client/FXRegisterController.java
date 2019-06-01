@@ -92,7 +92,7 @@ public class FXRegisterController {
 											
 											Stage stage = (Stage)usernameTextfield.getScene().getWindow();
 											FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
-											FXHomePageController controller = new FXHomePageController(u); /* pass the user to the HomePage controller */
+											FXHomePageController controller = new FXHomePageController(u, stage); /* pass the user to the HomePage controller */
 											fxmlLoader.setController(controller);
 											Node root = fxmlLoader.load();			
 											Scene scene = new Scene((Parent)root, 1000, 725); 

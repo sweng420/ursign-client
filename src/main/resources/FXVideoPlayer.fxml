@@ -6,7 +6,7 @@
 <?import javafx.scene.textfield.*?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ursign.ursign_client.FXPhrasebookController"
+            fx:controller="ursign.ursign_client.FXVideoPlayerController"
            
             prefHeight="400.0" prefWidth="600.0">
 

@@ -1,4 +1,4 @@
-package ursign.ursign_client;
+package quiz;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class QuizEngine {
     private static final int QUESTIONS = 3;
 
     private static ArrayList<QuizEngineFlashcard> testStrings = new ArrayList<>();
-    private static QuizEngineDeck cards = new QuizEngineDeck();
+    private static Quiz cards = new Quiz(0);
 
 
     public static void main(String[] args) throws IOException {
@@ -46,8 +46,8 @@ public class QuizEngine {
 
     public static void addCards(){
         // create flashcards
-        cards.getFlashcards().add(new QuizEngineFlashcard("zero", 0, 3));
-        cards.getFlashcards().add(new QuizEngineFlashcard("one", 1, 3));
+        cards.getFlashcards().add(new Question());
+        cards.getFlashcards().add(new Question("one", 1, 3));
         cards.getFlashcards().add(new QuizEngineFlashcard("two", 2, 1));
         cards.getFlashcards().add(new QuizEngineFlashcard("three", 3, 3));
         cards.getFlashcards().add(new QuizEngineFlashcard("four", 4, 3));

@@ -261,7 +261,7 @@ public class PhrasebookMain extends Application {
 			}
 		}
 		
-		//Add entered string to top of hsitory
+		//Add entered string to top of history
 		searchHistory.getItems().add(0, text);
 		searchHistory.setValue(text);
 	}

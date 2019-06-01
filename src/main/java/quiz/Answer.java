@@ -1,4 +1,6 @@
-package ursign.ursign_client;
+package quiz;
+
+import ursign.ursign_client.Multimedia;
 
 public class Answer {
 	

@@ -24,7 +24,9 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +36,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class FXSplashController {
 	
@@ -96,8 +99,20 @@ public class FXSplashController {
 						u.setUid(Integer.decode(wr.getJSON().get("userid").toString()));
 						
 						Stage stage = (Stage)usernameField.getScene().getWindow();
+						
+						/* kill the video audio (if any) when the stage is closed
+						 * this code was taken from player.Player.
+						 */
+						stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				            @Override
+				            public void handle(WindowEvent event) {
+				                Platform.exit();
+				                System.exit(0);
+				            }
+				        });
+						
 						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXHomePage.fxml"));     
-						FXHomePageController controller = new FXHomePageController(u); /* pass the user to the HomePage controller */
+						FXHomePageController controller = new FXHomePageController(u, stage); /* pass the user to the HomePage controller */
 						fxmlLoader.setController(controller);
 						Node root = fxmlLoader.load();			
 						Scene scene = new Scene((Parent)root, 1000, 725); 

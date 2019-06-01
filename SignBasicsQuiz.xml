@@ -1,0 +1,354 @@
+<quiz id = "2">
+  <name>Alphabet Quiz</name>
+  <questions>
+    <question type="multiple" correct="a" index = "0">
+      <content>
+	    <multimedia>
+	      <text>Which letter is shown below?</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>a.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>A</text></multimedia></answer>
+      <answer id="h"><multimedia><text>H</text></multimedia></answer>
+      <answer id="y"><multimedia><text>Y</text></multimedia></answer>
+    </question>
+	
+	<question type="multiple" correct="e" index = "1">
+	  <content>
+	    <multimedia>
+		  <text>Which letter is shown below?</text>
+		</multimedia>
+		<multimedia>
+		  <image>e.jpg</image>
+		</multimedia>
+	  </content>
+	  <answer id="e"><multimedia><text>E</text></multimedia></answer>
+	  <answer id="f"><multimedia><text>F</text></multimedia></answer>
+	  <answer id="m"><multimedia><text>M</text></multimedia></answer>
+	</question>
+	
+	<question type="multiple" correct="m" index = "2">
+	  <content>
+	    <multimedia>
+		  <text>Which letter is shown below?</text>
+		</multimedia>
+		<multimedia>
+		  <image>m.jpg</image>
+		</multimedia>
+	  </content>
+	  <answer id="t"><multimedia><text>T</text></multimedia></answer>
+	  <answer id="a"><multimedia><text>A</text></multimedia></answer>
+	  <answer id="m"><multimedia><text>M</text></multimedia></answer>
+	</question>
+	
+	<question type="multiple" correct="t" index = "3">
+	  <content>
+	    <multimedia>
+		  <text>Which letter is shown below?</text>
+		</multimedia>
+		<multimedia>
+		  <image>t.jpg</image>
+		</multimedia>
+	  </content>
+	  <answer id="s"><multimedia><text>S</text></multimedia></answer>
+	  <answer id="t"><multimedia><text>T</text></multimedia></answer>
+	  <answer id="n"><multimedia><text>N</text></multimedia></answer>
+	</question>
+	
+	<question type="multiple" correct="i" index = "4">
+	  <content>
+	    <multimedia>
+		  <text>Which letter is shown below?</text>
+		</multimedia>
+		<multimedia>
+		  <image>i.jpg</image>
+		</multimedia>
+	  </content>
+	  <answer id="i"><multimedia><text>I</text></multimedia></answer>
+	  <answer id="s"><multimedia><text>S</text></multimedia></answer>
+	  <answer id="a"><multimedia><text>A</text></multimedia></answer>
+	</question>
+
+    <question type="fill" index = "5">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>hello.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>Hello</text></multimedia></answer>
+      <answer id="b"><multimedia><text>Hi</text></multimedia></answer>
+      <answer id="c"><multimedia><text>""Howdy""</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "6">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>deaf.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>deaf</text></multimedia></answer>
+      <answer id="b"><multimedia><text>can't hear</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "7">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>hearing.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>hear</text></multimedia></answer>
+      <answer id="b"><multimedia><text>hearing</text></multimedia></answer>
+	  <answer id="c"><multimedia><text>listening</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "8">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>me.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>me</text></multimedia></answer>
+      <answer id="b"><multimedia><text>i</text></multimedia></answer>
+      <answer id="c"><multimedia><text>""Howdy""</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "9">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>name.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>name</text></multimedia></answer>
+      <answer id="b"><multimedia><text>called</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "10">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>nice.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>nice</text></multimedia></answer>
+      <answer id="b"><multimedia><text>good</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "11">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>again.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>again</text></multimedia></answer>
+      <answer id="b"><multimedia><text>repeat</text></multimedia></answer>
+    </question>
+    
+	<question type="fill" index = "12">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>yes.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>yes</text></multimedia></answer>
+      <answer id="b"><multimedia><text>not no</text></multimedia></answer>
+	  <answer id="c"><multimedia><text>yeah</text></multimedia></answer>
+    </question>
+	
+	<question type="fill" index = "13">
+      <content>
+	    <multimedia>
+	      <text>The person is signing _____</text>
+	    </multimedia>
+	    <multimedia>
+	      <image>no.jpg</image>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><text>no</text></multimedia></answer>
+      <answer id="b"><multimedia><text>nope</text></multimedia></answer>
+	  <answer id="c"><multimedia><text>hell no</text></multimedia></answer>
+    </question>
+	
+    <question type="anki" index = "14">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'family'</text>
+	    </multimedia>
+      </content>
+	    <answer id="family">
+		    <multimedia>
+	      		<video>family.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "15">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'excuse me'</text>
+	    </multimedia>
+      </content>
+	    <answer id="excuse me">
+		    <multimedia>
+	      		<video>excuseme.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "16">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'father'</text>
+	    </multimedia>
+      </content>
+	    <answer id="father">
+		    <multimedia>
+	      		<video>father.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "17">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'need'</text>
+	    </multimedia>
+      </content>
+	    <answer id="need">
+		    <multimedia>
+	      		<video>need.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "18">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'toilet'</text>
+	    </multimedia>
+      </content>
+	    <answer id="toilet">
+		    <multimedia>
+	      		<video>toilet.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "19">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'eat'</text>
+	    </multimedia>
+      </content>
+	    <answer id="eat">
+		    <multimedia>
+	      		<video>eat.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "20">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'hello'</text>
+	    </multimedia>
+      </content>
+	    <answer id="hello">
+		    <multimedia>
+	      		<video>hello.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "21">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'yes'</text>
+	    </multimedia>
+      </content>
+	    <answer id="yes">
+		    <multimedia>
+	      		<video>yes.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "22">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'help'</text>
+	    </multimedia>
+      </content>
+	    <answer id="help">
+		    <multimedia>
+	      		<video>help.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "23">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'need'</text>
+	    </multimedia>
+      </content>
+	    <answer id="need">
+		    <multimedia>
+	      		<video>need.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "24">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'goodbye'</text>
+	    </multimedia>
+      </content>
+	    <answer id="goodbye">
+		    <multimedia>
+	      		<video>goodbye.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+	
+	<question type="anki" index = "25">
+      <content>
+	    <multimedia>
+	      <text>Can you sign the word for 'use'</text>
+	    </multimedia>
+      </content>
+	    <answer id="use">
+		    <multimedia>
+	      		<video>use.mp4</video>
+	    	</multimedia>
+	    </answer>
+    </question>
+
+  </questions>
+</quiz>
+
