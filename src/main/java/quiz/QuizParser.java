@@ -26,7 +26,11 @@ public class QuizParser {
 		return quiz;
 	}
 	
-   public Boolean parse(String source) {
+	QuizParser(String source) {
+		parse(source);
+	}
+	
+   public void parse(String source) {
 	  
       try {
          File inputFile = new File(source);
@@ -56,13 +60,13 @@ public class QuizParser {
         	String qTypeAttrib = ((Element) qNode).getAttribute("type");
         	switch(qTypeAttrib) {
         	case "multiple":
-        		q = new Question(Type.multiple, 0);
+        		q = new Question(Type.multiple, 5);
         		break;
         	case "anki":
-        		q = new Question(Type.anki, 0);
+        		q = new Question(Type.anki, 5);
         		break;
         	case "fill":
-        		q = new Question(Type.fill, 0);
+        		q = new Question(Type.fill, 5);
         		break;
         	default:
         		throw new IllegalArgumentException("Unrecognised question type: "+qTypeAttrib);
@@ -102,7 +106,6 @@ public class QuizParser {
       } catch (Exception e) {
          e.printStackTrace();
       }
-	return null;
    }
    
 }

@@ -49,8 +49,7 @@ public final class Util {
 	
 	public static List<Multimedia> parseMultimedias(NodeList mList) {
 		   List<Multimedia> ret = new ArrayList<Multimedia>();
-		   for (int m_temp = 0; m_temp < mList.getLength(); m_temp++) {
-	           Node mNode = mList.item(m_temp);
+		   for (Node mNode : iterable(mList)) {
 	           if(mNode != null) {
 	               if (mNode.getNodeType() == Node.ELEMENT_NODE) {
 	                   Element mElement = (Element) mNode;
@@ -62,6 +61,7 @@ public final class Util {
 	                   } else {
 	                 	  styleString = styleNode.getTextContent();
 	                   }
+	                   System.out.println(mElement.getElementsByTagName("filelocation"));
 	                   String loc = mElement.getElementsByTagName("filelocation").item(0).getTextContent();
 	                   String multiText = loc;
 	                   if(mElement.getElementsByTagName("type").item(0).getTextContent().equals("text")){

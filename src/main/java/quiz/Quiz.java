@@ -2,6 +2,7 @@ package quiz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Quiz {
@@ -62,10 +63,20 @@ public class Quiz {
                 randomWeight = randomWeight - questions.get(j).getBox();
                 // don't add duplicate questions
                 if (randomWeight <= 0 && !questionList.contains(questions.get(j))) {
+                	System.out.println("adding "+questions.get(j));
                 	questionList.add(questions.get(j));
                     break;
                 }
             }
+        }
+        while(questionList.size() != qNum) {
+        	Collections.shuffle(questions);
+        	for(Question q : questions) {
+        		if (!questionList.contains(q)) {
+                	System.out.println("adding "+q);
+                	questionList.add(q);
+                }
+        	}
         }
         
         return questionList;
