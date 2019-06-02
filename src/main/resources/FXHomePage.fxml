@@ -117,7 +117,7 @@
 					    	<HBox spacing="10"  alignment="center" fx:id="detailsbox">
 					    		<VBox>
 					    		<children>
-						    	<Label text="My Students" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+						    	<Label text="My Students:" GridPane.columnIndex="0" GridPane.rowIndex="0" 
 							            style="-fx-font: NORMAL 12 Tahoma;"/>
 							 
 							     <TableView fx:id="childrenTableView" GridPane.columnIndex="0" 
@@ -233,7 +233,7 @@
 		                <Separator prefWidth="200.0" fx:id="extraControlsSep"  />
 		                 <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="gallerybox_controlbox">
 							<Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
-							<Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
+							<Button fx:id="gallerybox_slideshowbutton" text="Single Image" underline="true" onAction="#handleGallerySlideshow"></Button>
 							<Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
 		                 	<Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
 		                 </HBox>

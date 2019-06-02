@@ -1,4 +1,4 @@
-package ursign.ursign_client;
+	package ursign.ursign_client;
 
 import java.awt.EventQueue;
 import java.io.IOException;

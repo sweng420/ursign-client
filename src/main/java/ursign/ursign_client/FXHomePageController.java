@@ -205,7 +205,7 @@ public class FXHomePageController {
 				//Create list of ImageView nodes with image ratio preserved and 300 width
 				imageLargeNodeList[i] = new ImageView(imageList[i]);
 				imageLargeNodeList[i].setPreserveRatio(true);
-				imageLargeNodeList[i].setFitWidth(300);
+				imageLargeNodeList[i].setFitHeight(300);
 				imageLargeNodeList[i].setEffect(dropShadow);
 				
 				//Create image information for each image
@@ -426,7 +426,7 @@ public class FXHomePageController {
 		Image imageVar;
 		File imageFile;
 		ImageView imageViewFile;
-		imageFile = new File("images/icon.jpg");
+		imageFile = new File("Resources/profileIconDefualt.jpg");
 		imageVar = new Image("file:"+imageFile.getAbsolutePath());
 		
 		//Create list of ImageView nodes of size 100x100 for image gallery

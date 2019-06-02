@@ -11,6 +11,8 @@ import org.apache.http.message.BasicNameValuePair;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -96,6 +98,16 @@ public class FXRegisterController {
 											fxmlLoader.setController(controller);
 											Node root = fxmlLoader.load();			
 											Scene scene = new Scene((Parent)root, 1000, 725); 
+											
+											//Inform user that registration was successful
+											Alert alert = new Alert(AlertType.INFORMATION);
+											alert.setTitle("Registration Successful");
+											alert.setHeaderText("Registration Successful");
+											alert.setContentText("You are now logged in!");
+
+											alert.showAndWait();
+											
+											
 											stage.setScene(scene);    
 											stage.show();
 									

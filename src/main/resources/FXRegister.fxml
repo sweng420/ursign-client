@@ -38,19 +38,24 @@
          <children>
             <VBox alignment="CENTER_LEFT" layoutX="70.0" layoutY="58.0" maxWidth="400.0" minWidth="200.0" prefWidth="280.0" spacing="5.0">
                <children>
-                  <Label styleClass="formLabelText" text="Username">
+               	  <Label styleClass="formLabelText" text="Required Fields *">
                      <VBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="5.0"  />
+                     </VBox.margin>
+                  </Label>
+                  <Label styleClass="formLabelText" text="Username*">
+                     <VBox.margin>
+                        <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="usernameTextfield" />
-                  <Label styleClass="formLabelText" text="Password">
+                  <Label styleClass="formLabelText" text="Password*">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
                   <PasswordField fx:id="passwordTextfield" />
-                  <Label text="Confirm Password">
+                  <Label text="Confirm Password*">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
@@ -83,25 +88,25 @@
          <children>
             <VBox alignment="CENTER_LEFT" layoutX="60.0" layoutY="55.0" maxWidth="400.0" minWidth="200.0" prefWidth="280.0" spacing="5.0">
                <children>
-                  <Label text="Email">
+                  <Label text="Email*">
                      <VBox.margin>
                         <Insets left="5.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="emailTextfield" />
-                  <Label text="Name">
+                  <Label text="Name*">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="realnameTextfield"  />
-                  <Label text="Age">
+                  <Label text="Age*">
                      <VBox.margin>
                         <Insets left="5.0" top="30.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="ageTextfield"/> 
-                  <Label text="Gender">
+                  <Label text="Gender*">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
