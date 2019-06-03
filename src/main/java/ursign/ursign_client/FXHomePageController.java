@@ -119,6 +119,7 @@ public class FXHomePageController {
     @FXML private TextField ageTextfield;
     @FXML private Label emailLabel;
     @FXML private TextField emailTextfield;
+    @FXML private Label creditsLabel;
     @FXML private TableView childrenTableView;
     @FXML private Label profiletitle;
     @FXML private TableColumn editcolumn;
@@ -140,6 +141,7 @@ public class FXHomePageController {
     @FXML private Tab profiletab;
     @FXML private Tab gallerytab;
     @FXML private FXPhrasebookController phrasebookIncludeController;
+    @FXML private FXQuizController quizIncludeController;
     
     
 	private int numOfImages = 43;
@@ -207,13 +209,7 @@ public class FXHomePageController {
 				imageLargeNodeList[i].setPreserveRatio(true);
 				imageLargeNodeList[i].setFitHeight(300);
 				imageLargeNodeList[i].setEffect(dropShadow);
-				
-				//Create image information for each image
-				///imageInfoStrings[i] = ("This is image number: "+i);
-				//imageInfoLabels[i] = new Label(imageInfoStrings[i]);
-				//imageInfoLabels[i].setStyle("-fx-font-size: 20; -fx-text-fill: Black;");
 			}
-			
 			
 			fillGrid(gridStartIndex);
 		} catch (Exception e) {
@@ -224,14 +220,13 @@ public class FXHomePageController {
 	@FXML protected void handleRegisterStudent(ActionEvent event) {
 		
 		try {
-			//Stage stage = (Stage)usernameField.getScene().getWindow();
 			System.out.println("uid: "+u.getUid());
 			Stage stage = new Stage();
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXRegister.fxml"));     
 			FXRegisterController controller = new FXRegisterController(u.getUid()); /* pass the user to the HomePage controller */
 			fxmlLoader.setController(controller);
 			Node root = fxmlLoader.load();			
-			Scene scene = new Scene((Parent)root, 1000, 500);
+			Scene scene = new Scene((Parent)root, stage.getWidth(), stage.getHeight());
 			stage.setScene(scene);
 			stage.setTitle("Register Student");
 		    stage.initModality(Modality.WINDOW_MODAL);
@@ -351,7 +346,7 @@ public class FXHomePageController {
 	}
 	
 	@FXML protected void handleGallerySlideshow(ActionEvent event) {
-		currentSlideNode = 0;
+		//currentSlideNode = 0;
 		enterSlideShow(currentSlideNode);
 		gallerybox_slideshowbutton.setDisable(true);
 		gallerybox_gallerybutton.setDisable(false);
@@ -432,8 +427,8 @@ public class FXHomePageController {
 		//Create list of ImageView nodes of size 100x100 for image gallery
 		imageViewFile = new ImageView(imageVar);
 		imageViewFile.setPreserveRatio(false);
-		imageViewFile.setFitWidth(150);
-		imageViewFile.setFitHeight(150);
+		imageViewFile.setFitWidth(110);
+		imageViewFile.setFitHeight(110);
 		
 		iconimage.setImage(imageVar);
 		
@@ -463,6 +458,8 @@ public class FXHomePageController {
 				emailLabel.setText(u.getEmail());
 				ageLabel.setText(Integer.toString(u.getAge()));
 				ageTextfield.setText(Integer.toString(u.getAge()));
+				creditsLabel.setText(Integer.toString(u.getCredits()));
+
 				/*JsonElement children = wr.getJSON().get("children");
 				Type listType = new TypeToken<List<User>>() {}.getType();
 				List<User> childrenList = new Gson().fromJson(children, listType);
@@ -482,6 +479,7 @@ public class FXHomePageController {
 				
 				ObservableList<User> childUsers = childrenTableView.getItems();
 				childrenTableView.getItems().clear();
+				childrenTableView.setMinHeight(50);
 
 				childUsers.removeAll();
 				for(int j = 0; j < ja.length(); j++) {
@@ -546,8 +544,18 @@ public class FXHomePageController {
             tabpane.getTabs().add(tab);
         }
         
+        tabpane.getSelectionModel().selectedItemProperty().addListener(
+        	    new ChangeListener<Tab>() {
+        	        @Override
+        	        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+        	            initialize_profile();
+        	        }
+        	    }
+        	);
+        
         phrasebookIncludeController.seth(1111);
-        }
+        quizIncludeController.setUser(u);
+    }
 
 	
 	

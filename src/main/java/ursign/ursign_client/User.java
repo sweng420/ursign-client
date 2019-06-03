@@ -16,6 +16,7 @@ public class User {
 	private List<User> children;
 	private Boolean login_complete;
 	private List<Cookie> cookies;
+	private Integer credits;
 	
 	public List<Cookie> getCookies() {
 		return cookies;
@@ -49,6 +50,15 @@ public class User {
 		this.children = null;
 		this.login_complete = false;
 		this.cookies = null;
+		this.credits = 0;
+	}
+	
+	public Integer getCredits() {
+		return credits;
+	}
+	
+	public void addCredits(int n) {
+		this.credits += n;
 	}
 	
 	public String getUsername() {

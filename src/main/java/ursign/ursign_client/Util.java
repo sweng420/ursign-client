@@ -13,6 +13,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+enum MediaType {
+	quizXML,
+	slideXML,
+	galleryImg,
+	phrasebookPhr,
+	phrasebookImg,
+	videoFile,
+	audioFile,
+}
+
 public final class Util {
 	public static Iterable<Node> iterable(final NodeList n) {
 		  return new Iterable<Node>() {
@@ -47,13 +57,48 @@ public final class Util {
 		  };
 	}
 	
+	public static String constructPath(MediaType t, String name) {
+		final String prefix = "Resources/";
+		switch(t) {
+		case quizXML:
+			return prefix+"XML/"+"quiz/"+name;
+		case slideXML:
+			return prefix+"XML/"+"slide/"+name;
+		case galleryImg:
+			return prefix+"imagesGallery/"+name;
+		case phrasebookPhr:
+			return prefix+"phrasebook/phrases/"+name;
+		case phrasebookImg:
+			return prefix+"phrasebook/images/"+name;
+		case videoFile:
+			return prefix+"videofiles/"+name;
+		case audioFile:
+			return prefix+"audiofiles/"+name;
+		default:
+			return name;
+		}
+	}
+	
 	public static List<Multimedia> parseMultimedias(NodeList mList) {
 		   List<Multimedia> ret = new ArrayList<Multimedia>();
+		   int rowInfo;
+		   int i = 0;
 		   for (Node mNode : iterable(mList)) {
+			   
 	           if(mNode != null) {
 	               if (mNode.getNodeType() == Node.ELEMENT_NODE) {
 	                   Element mElement = (Element) mNode;
-	                   String rowInfo = mElement.getAttribute("row");
+	                   
+	                   try {
+	                	   String rowInfoStr = mElement.getAttribute("row");
+	                	   rowInfo = Integer.parseInt(rowInfoStr);
+	                	   if(rowInfo < 0) {
+	                		   rowInfo = 0;
+	                	   }
+	                   } catch(Exception e) {
+	                	   rowInfo = 0;
+	                   }
+	                   
 	                   Node styleNode = mElement.getElementsByTagName("style").item(0);
 	                   String styleString;
 	                   if(styleNode == null) {
@@ -62,6 +107,7 @@ public final class Util {
 	                 	  styleString = styleNode.getTextContent();
 	                   }
 	                   System.out.println(mElement.getElementsByTagName("filelocation"));
+	                   System.out.println("n="+mElement.getElementsByTagName("filelocation").getLength());
 	                   String loc = mElement.getElementsByTagName("filelocation").item(0).getTextContent();
 	                   String multiText = loc;
 	                   if(mElement.getElementsByTagName("type").item(0).getTextContent().equals("text")){
@@ -82,6 +128,7 @@ public final class Util {
 		                ));
 	               }
 	           }
+	           i++;
 		   }
 		   return ret;
 	   }

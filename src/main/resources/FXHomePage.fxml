@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.*?>
 <?import ursign.ursign_client.*?>
 
-<BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
+<BorderPane maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
 	<center>
 		<TabPane fx:id="tabpane">
 			<Tab text="Profile" fx:id="profiletab" >
@@ -107,7 +107,11 @@
 											        GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 											 	<Label text="joe@bloggs" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="emailLabel" />
 											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false" fx:id="emailTextfield"/> 
+											        GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false" fx:id="emailTextfield"/>
+											   
+											   <Label text="Credits:"
+											        GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+											 	<Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="creditsLabel" /> 
 											</children>
 							    		</GridPane>
 				     				</center>
@@ -184,6 +188,7 @@
 				    </BorderPane>
 			</Tab>
 			<Tab text="Quiz" fx:id="quiztab">
+			    <fx:include source="FXQuiz.fxml" fx:id="quizInclude"></fx:include>
 			</Tab>
 			<Tab fx:id="Phrasebook" text="Phrasebook">
             	<fx:include source="FXPhrasebook.fxml" fx:id="phrasebookInclude"></fx:include>

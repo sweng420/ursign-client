@@ -1,15 +1,22 @@
 <id value = "2">
-	<page>  <!--red-->
+	<page duration="5">  <!--red-->
 		<multimedia row="1">
 			<type>Video</type>
-			<filelocation>images/hello.mp4</filelocation>
+			<filelocation>hello.mp4</filelocation>
 			<meta>		
 			</meta>
 		</multimedia>
     
 		<multimedia row="1">
 			<type>Audio</type>
-			<filelocation>images/piano2.wav</filelocation>
+			<filelocation>piano2.wav</filelocation>
+			<meta>
+			</meta>
+		</multimedia>
+		
+		<multimedia row="2">
+			<type>Graphic</type>
+			<filelocation>Circle</filelocation>
 			<meta>
 			</meta>
 		</multimedia>
@@ -18,10 +25,7 @@
   	<page>  <!--green-->
 		<multimedia row="1">
 			<type>Image</type>
-			<filelocation>images/1.jpg</filelocation>
-			 <meta>
-			 	<newrow>true</newrow>
-			 </meta>
+			<filelocation>1.jpg</filelocation>
 		</multimedia>
     
 		<multimedia row="1">
@@ -35,7 +39,7 @@
   	<page>  <!--blue-->
 		<multimedia row="1">
 			<type>Image</type>
-			<filelocation>images/2.jpg</filelocation>
+			<filelocation>2.jpg</filelocation>
 			<meta>
 				<duration></duration>
 			</meta>

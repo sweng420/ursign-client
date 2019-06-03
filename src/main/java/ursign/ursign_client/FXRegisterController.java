@@ -97,7 +97,7 @@ public class FXRegisterController {
 											FXHomePageController controller = new FXHomePageController(u, stage); /* pass the user to the HomePage controller */
 											fxmlLoader.setController(controller);
 											Node root = fxmlLoader.load();			
-											Scene scene = new Scene((Parent)root, 1000, 725); 
+											Scene scene = new Scene((Parent)root, 800,600); 
 											
 											//Inform user that registration was successful
 											Alert alert = new Alert(AlertType.INFORMATION);

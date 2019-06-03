@@ -4,9 +4,9 @@ public class Multimedia {
 	private String type;
 	private String filelocation;
 	private String style;
-	private String rowInfo;
+	private int rowInfo;
 	
-	Multimedia(String type, String filelocation, String style, String row){
+	Multimedia(String type, String filelocation, String style, int row){
 		this.type=type;
 		this.filelocation=filelocation;
 		this.style = style;
@@ -23,7 +23,7 @@ public class Multimedia {
 	public String getStyle(){
 		return style;
 	}
-	public String getRowInfo(){
+	public int getRowInfo(){
 		return rowInfo;
 	}
 	public void setType(String type){

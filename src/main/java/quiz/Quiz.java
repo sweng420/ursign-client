@@ -22,11 +22,13 @@ public class Quiz {
 		  if (questions == null) {
 		    throw new NullPointerException("questions must not be null");
 		  }
+		  
 		  this.questions = questions;
 		}
 	
 	public void addQuestion(Question question) {
 		questions.add(question);
+		System.out.println("!!!!!!!!!!"+questions.size());
 	}
 	
 	public void setID(int id) {
@@ -53,24 +55,24 @@ public class Quiz {
 		ArrayList<Question> questionList = new ArrayList<>();
 		// Sum up all box numbers
         getSum();
-
+        System.out.println("mmm");
         // populate testStrings with weighted flashcards
         for (int i = 0; i < qNum; i++) {
-
+        	System.out.println("n");
             int randomWeight = (int) (Math.random() * sum + 1);
-
+            System.out.println("o");
+            
             for (int j = 0; j < questions.size(); j++) {
                 randomWeight = randomWeight - questions.get(j).getBox();
                 // don't add duplicate questions
                 if (randomWeight <= 0 && !questionList.contains(questions.get(j))) {
-                	System.out.println("adding "+questions.get(j));
                 	questionList.add(questions.get(j));
                     break;
                 }
             }
         }
         while(questionList.size() != qNum) {
-        	Collections.shuffle(questions);
+        	//Collections.shuffle(questions);
         	for(Question q : questions) {
         		if (!questionList.contains(q)) {
                 	System.out.println("adding "+q);

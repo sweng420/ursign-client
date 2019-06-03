@@ -117,7 +117,7 @@ public class Controls extends HBox {
             	// If playing then pause
                 if (media_player_component.getMediaPlayer().getMediaPlayerState() == libvlc_state_t.libvlc_Playing && over == false) { 
                 	media_player_component.getMediaPlayer().pause(); 
-                	play_pause.setText(">"); 
+                	play_pause.setText("➤"); 
                 
                 } 
                 // If the video paused then play 
@@ -142,7 +142,7 @@ public class Controls extends HBox {
 		            	// If playing then pause
 		                if (media_player_component.getMediaPlayer().getMediaPlayerState() == libvlc_state_t.libvlc_Playing && over == false) { 
 		                	media_player_component.getMediaPlayer().pause(); 
-		                	play_pause.setText(">"); 
+		                	play_pause.setText("➤"); 
 		                
 		                } 
 		                // If the video paused then play 

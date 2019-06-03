@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.*?>
 <?import ursign.ursign_client.*?>
 
-<BorderPane maxHeight="1080" maxWidth="1920" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
+<BorderPane maxHeight="600" maxWidth="800" minHeight="600" minWidth="800" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml">
 	<center>
 		<TabPane fx:id="tabpane">
 			<Tab text="Profile" fx:id="profiletab" >
@@ -107,7 +107,11 @@
 											        GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 											 	<Label text="joe@bloggs" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="emailLabel" />
 											    <TextField 
-											        GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false" fx:id="emailTextfield"/> 
+											        GridPane.columnIndex="1" GridPane.rowIndex="5" visible="false" fx:id="emailTextfield"/>
+											   
+											   <Label text="Credits:"
+											        GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+											 	<Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="6" fx:id="creditsLabel" /> 
 											</children>
 							    		</GridPane>
 				     				</center>
@@ -117,7 +121,7 @@
 					    	<HBox spacing="10"  alignment="center" fx:id="detailsbox">
 					    		<VBox>
 					    		<children>
-						    	<Label text="My Students" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+						    	<Label text="My Students:" GridPane.columnIndex="0" GridPane.rowIndex="0" 
 							            style="-fx-font: NORMAL 12 Tahoma;"/>
 							 
 							     <TableView fx:id="childrenTableView" GridPane.columnIndex="0" 
@@ -184,6 +188,7 @@
 				    </BorderPane>
 			</Tab>
 			<Tab text="Quiz" fx:id="quiztab">
+			    <fx:include source="FXQuiz.fxml" fx:id="quizInclude"></fx:include>
 			</Tab>
 			<Tab fx:id="Phrasebook" text="Phrasebook">
             	<fx:include source="FXPhrasebook.fxml" fx:id="phrasebookInclude"></fx:include>
@@ -233,7 +238,7 @@
 		                <Separator prefWidth="200.0" fx:id="extraControlsSep"  />
 		                 <HBox alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="800.0" spacing="5.0" fx:id="gallerybox_controlbox">
 							<Button fx:id="gallerybox_prevbutton" text="Previous" underline="true" onAction="#handleGalleryPrev"></Button>
-							<Button fx:id="gallerybox_slideshowbutton" text="Slideshow" underline="true" onAction="#handleGallerySlideshow"></Button>
+							<Button fx:id="gallerybox_slideshowbutton" text="Single Image" underline="true" onAction="#handleGallerySlideshow"></Button>
 							<Button fx:id="gallerybox_gallerybutton" text="Gallery" underline="true" onAction="#handleGalleryGallery"></Button>
 		                 	<Button fx:id="gallerybox_nextbutton" text="Next" underline="true" onAction="#handleGalleryNext"></Button>
 		                 </HBox>

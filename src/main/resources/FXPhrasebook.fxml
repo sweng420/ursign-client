@@ -4,14 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.textfield.*?>
-<AnchorPane xmlns="http://javafx.com/javafx"
+   <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ursign.ursign_client.FXPhrasebookController"
-           
-            prefHeight="400.0" prefWidth="600.0">
-
-   <Label text=" This is Tab 1 " translateX="10"></Label>
-   <BorderPane prefHeight="400.0" prefWidth="600.0"  fx:id="rootBorderPane">
+            fx:controller="ursign.ursign_client.FXPhrasebookController" prefHeight="400.0" prefWidth="600.0"  fx:id="rootBorderPane">
    	
    </BorderPane>
-</AnchorPane>

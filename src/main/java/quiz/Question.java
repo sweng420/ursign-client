@@ -52,6 +52,18 @@ public class Question {
         }
 	}
 	
+	public boolean isMultiple() {
+		return questionType == Type.multiple;
+	}
+	
+	public boolean isAnki() {
+		return questionType == Type.anki;
+	}
+	
+	public boolean isFill() {
+		return questionType == Type.fill;
+	}
+	
 	public Type getQuestionType() {
 		return questionType;
 	}
@@ -103,20 +115,8 @@ public class Question {
         this.box = BOXES;
     }
     
-    /* todo: change this to fuzzy match */
-    public boolean hasMatch(String answer) {
-    	for(Answer a : answers) {
-    		Multimedia answerContent = a.getMultimedia();
-    		if(answerContent.getType().equals("text")) {
-    			if(answerContent.getFilelocation().equals(answer)) {
-    				return true;
-    			}
-    		}
-    	}
-    	return false;
-    }
-    
     public boolean checkAnswer(String answer) {
+    	System.out.println("checking "+answer+" against "+correct+" on type "+questionType);
     	switch(questionType) {
     	case multiple:
     	case test:
@@ -125,9 +125,17 @@ public class Question {
     		}
     		break;
     	case fill:
-    		if(hasMatch(answer)) {
-    			return true;
-    		}
+    		/* todo: change to fuzzy match */
+    		System.out.println("alength="+answers.size());
+    		for(Answer a : answers) {
+        		for(Multimedia m : a.getMultimedias()){
+        			if(m.getType().equals("Text") && m.getFilelocation().toLowerCase().equals(answer.toLowerCase())) {
+        				return true;
+        			} else {
+        				System.out.println(answer.toLowerCase() +"!="+m.getFilelocation().toLowerCase());
+        			}
+        		}
+        	}
     		break;
     	case anki:
     		if(answer.equals("easy")) {

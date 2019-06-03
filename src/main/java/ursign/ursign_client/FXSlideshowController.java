@@ -4,11 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import com.sun.javafx.geom.Rectangle;
 
 import AudioPlayer.AudioPlayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -24,6 +28,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import player.Player;
@@ -33,10 +41,11 @@ public class FXSlideshowController {
 	@FXML BorderPane collectionBorderPane;
 	@FXML Button slide_prevbutton;
 	@FXML Button slide_nextbutton;
+	
 	private Presentation selectedPresentation;
 	private int currentPage;
 	private ComboBox<String> collectionsList;
-	private GridPane pageVBox = new GridPane();
+	private FlowPane pageVBox = new FlowPane(Orientation.VERTICAL);
 	private List<String> myCollections = new ArrayList<String>();
 	
 	public void initialize() {
@@ -62,6 +71,10 @@ public class FXSlideshowController {
 			loadCollection(collectionsList.getSelectionModel().getSelectedIndex());
 			loadControls();
 		});
+		
+		pageVBox.setVgap(8);
+	    pageVBox.setHgap(4);
+	    pageVBox.setAlignment(Pos.CENTER);
 	}
 	
 	private void loadControls() {
@@ -92,71 +105,110 @@ public class FXSlideshowController {
 		
 		CollectionParser cp = new CollectionParser(myCollections.get(id));
 		cp.parse();
-		//assertEquals(cp.getPresentation().getPages().size(), 3);
+
 		currentPage = 0;
 		selectedPresentation = cp.getPresentation();
 		showPage(0);
 	}
 	
+	public static Pane vizMultimedia(Multimedia m) {
+		switch(m.getType()) {
+		case "Image":
+			Pane imgPane = new Pane();
+			File imageFile = new File(Util.constructPath(MediaType.galleryImg, m.getFilelocation()));
+			Image imageElement = new Image("file:"+imageFile.getAbsolutePath());
+			
+			ImageView iv2 = new ImageView();
+	         iv2.setImage(imageElement);
+	         iv2.setFitWidth(100);
+	         iv2.setPreserveRatio(true);
+	         iv2.setSmooth(true);
+	         iv2.setCache(true);
+	         
+	         imgPane.getChildren().add(iv2);
+
+	         return imgPane;
+		case "Text":
+			Pane txtPane = new Pane();
+			Text textElement = new Text();
+			textElement.setText(m.getFilelocation());
+			textElement.setStyle(m.getStyle());
+			
+			txtPane.getChildren().add(textElement);
+
+			return txtPane;
+		case "Video":
+			//Root pane
+			Pane rootPane = new Pane();
+			
+			//Video Node
+			HBox videoBox = new HBox();
+			Canvas canvas = new Canvas(250,400);
+			
+			//State = 0 for singleVideo
+			Player vidplayer  = new Player(canvas,250,400, new Stage(), 0);
+			vidplayer.controls.disableButtons(true);
+			String [] paths = {Util.constructPath(MediaType.videoFile, m.getFilelocation())};
+
+			//Load videos
+			vidplayer.loadPaths(paths);
+			vidplayer.setMaxHeight(canvas.getHeight());
+			vidplayer.setMaxWidth(canvas.getWidth());
+			
+			videoBox.getChildren().add(vidplayer);
+			
+			rootPane.getChildren().add(vidplayer);
+			vidplayer.loadVideo(0);
+
+			return rootPane;
+		case "Audio":
+			AudioPlayer audplayer = new AudioPlayer(Util.constructPath(MediaType.galleryImg, m.getFilelocation()));
+			Pane audPane = audplayer.getPane();
+			return audPane;
+		case "Graphic":
+			String shapeType = m.getFilelocation();
+			HBox gfxPane = new HBox();
+			
+			switch(shapeType) {
+			case "Circle":
+				Circle c = graphics.GraphicsDisplay.drawCircle(0,0,100,100,new Color(0.2, 0.3, 0.6, 1));
+				gfxPane.getChildren().add(c);
+				return gfxPane;
+			case "Rectangle":
+				javafx.scene.shape.Rectangle r = graphics.GraphicsDisplay.drawRect(50, 50, 20, 30, 2, new Color(0.5, 0.4, 0.6, 1));
+
+				gfxPane.getChildren().add(r);
+				return gfxPane;
+			case "Ellipse":
+				Ellipse e = graphics.GraphicsDisplay.drawEllipse(50, 50, 30, 15, 2, new Color(0.2, 0.3, 0.6, 1));
+				
+			
+				gfxPane.getChildren().add(e);
+				return gfxPane;
+			case "Line":
+				Line l = graphics.GraphicsDisplay.drawLine(0, 0, 50, 50, 2, new Color(0.1, 0.6, 0.1, 1));
+
+				gfxPane.getChildren().add(l);
+				return gfxPane;
+	
+				default:
+					return new Pane();
+			}
+	     default:
+	    	 return new Pane();
+	    	// break;
+		}
+	}
+	
 	private void showPage(int pageNum) {
 		pageVBox.getChildren().clear();
+		int i = 0;
 		for(Multimedia pageMultimedia : selectedPresentation.getPages().get(pageNum).getMultimedias()) {
-			switch(pageMultimedia.getType()) {
-			case "Image":
-				File imageFile = new File(pageMultimedia.getFilelocation());
-				Image imageElement = new Image("file:"+imageFile.getAbsolutePath());
-				
-				ImageView iv2 = new ImageView();
-		         iv2.setImage(imageElement);
-		         iv2.setFitWidth(100);
-		         iv2.setPreserveRatio(true);
-		         iv2.setSmooth(true);
-		         iv2.setCache(true);
-		         
-		         pageVBox.getChildren().add(iv2);
-		         break;
-			case "Text":
-				Text textElement = new Text();
-				textElement.setText(pageMultimedia.getFilelocation());
-				textElement.setStyle(pageMultimedia.getStyle());
-				
-				pageVBox.getChildren().add(textElement);
-				break;
-			case "Video":
-				//Root pane
-				Pane rootPane = new Pane();
-				
-				//Video Node
-				HBox videoBox = new HBox();
-				Canvas canvas = new Canvas(250,400);
-				
-				//State = 0 for singleVideo
-				Player vidplayer  = new Player(canvas,250,400, new Stage(), 0);
-				vidplayer.controls.disableButtons(true);
-				String [] paths = {pageMultimedia.getFilelocation()};
-
-				//Load videos
-				vidplayer.loadPaths(paths);
-				vidplayer.setMaxHeight(canvas.getHeight());
-				vidplayer.setMaxWidth(canvas.getWidth());
-				
-				videoBox.getChildren().add(vidplayer);
-				
-				rootPane.getChildren().add(vidplayer);
-				vidplayer.loadVideo(0);
-				GridPane.setRowIndex(rootPane, 0);
-				pageVBox.getChildren().add(rootPane);
-				
-				break;
-			case "Audio":
-				AudioPlayer audplayer = new AudioPlayer(pageMultimedia.getFilelocation());
-				Pane audPane = audplayer.getPane();
-				GridPane.setRowIndex(audPane, 1);
-				pageVBox.getChildren().add(audPane);
-				break;
-		     default:
-		    	 break;
-			}
+			Pane p = vizMultimedia(pageMultimedia);
+			
+			pageVBox.getChildren().add(p);
+			
+			i++;
 		}
 	}
 }

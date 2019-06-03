@@ -1,16 +1,18 @@
 package quiz;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ursign.ursign_client.Multimedia;
 
 public class Answer {
+	private List<Multimedia> multimedias;
+	private String id;
 	
 	Answer(String id){
 		this.id = id;
+		multimedias = new ArrayList<Multimedia>();
 	}
-	
-
-	private Multimedia multimedia;
-	private String id;
 
 	public String getId() {
 		return id;
@@ -19,11 +21,15 @@ public class Answer {
 		this.id = id;
 	}
 	
-	public Multimedia getMultimedia(){
-		return multimedia;
+	public void setMultimedias(List<Multimedia> ms){
+		this.multimedias = ms;
 	}
-	public void setMultimedia(Multimedia multimedia) {
-		this.multimedia = multimedia;
+	public void addMultimedia(Multimedia m) {
+		this.multimedias.add(m);
 	}
+	public List<Multimedia> getMultimedias() {
+		return multimedias;
+	}
+
 	
 }

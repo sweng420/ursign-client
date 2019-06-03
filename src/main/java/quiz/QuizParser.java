@@ -21,19 +21,19 @@ import org.w3c.dom.Element;
 public class QuizParser {
 	
 	private Quiz quiz = new Quiz(0);
-
+	private String quizFile;
 	public Quiz getQuiz() {
 		return quiz;
 	}
 	
-	QuizParser(String source) {
-		parse(source);
+	public QuizParser(String source) {
+		this.quizFile = source;
 	}
 	
-   public void parse(String source) {
+   public void parse() {
 	  
       try {
-         File inputFile = new File(source);
+         File inputFile = new File(quizFile);
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
          DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
          Document doc = dBuilder.parse(inputFile);
@@ -77,14 +77,17 @@ public class QuizParser {
             NodeList aList = ((Element) qNode).getElementsByTagName("answer");
 
             for (Node aNode : Util.iterable(aList)) {          
-                String answerid = ((Element) aNode).getAttribute("value");
+                String answerid = ((Element) aNode).getAttribute("id");
                 Answer answer = new Answer(answerid);
                 
                 /* get a list of the multimedia in this answer */
                 NodeList answerMediaList = ((Element) aNode).getElementsByTagName("multimedia");
                 
-                /* answers should only really have a single multimedia so just take the first */
-                answer.setMultimedia(Util.parseMultimedias(answerMediaList).get(0));
+                List<Multimedia> answerMedias = Util.parseMultimedias(answerMediaList);
+                
+                for(Multimedia am : answerMedias){
+                	answer.addMultimedia(am);
+                }
                 
                 /* add answer to question */
                 q.addAnswer(answer);
@@ -98,6 +101,18 @@ public class QuizParser {
             
             /* mlist - list of multimedia */
             NodeList mList = ((Element) cNode).getElementsByTagName("multimedia");
+            
+            String qIndexAttrib = ((Element) qNode).getAttribute("index");
+            if(qIndexAttrib != null) {
+            	System.out.println(qIndexAttrib);
+            }
+            q.setIndex(Integer.parseInt(qIndexAttrib));
+            
+            String qCorrectAttrib = ((Element) qNode).getAttribute("correct");
+            if(qIndexAttrib != null) {
+            	System.out.println(qCorrectAttrib);
+            }
+            q.setCorrect(qCorrectAttrib);
             
             q.setContent(Util.parseMultimedias(mList));
             

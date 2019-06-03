@@ -1,39 +1,94 @@
 <quiz id = "2">
   <name>Alphabet Quiz</name>
   <questions>
-    <question type="multiple" correct="a" index = "0">
-      <content>
-	    <multimedia>
-	      <type>Text</type>
-	      <filelocation>Which letter is shown below?</filelocation>
+    <!--  two sequential numbers -->
+    <question type="multiple" correct="5_6" index="1">
+    	<content>
+    		<multimedia>
+    			<type>Text</type>
+    			<filelocation>Which of the following pairs are sequential signs?</filelocation>
+    		</multimedia>
+    	</content>
+    	
+    	<answer id="5_6">
+    	<multimedia>
+	      <type>Image</type>
+	      <filelocation>five.png</filelocation>
 	    </multimedia>
 	    <multimedia>
 	      <type>Image</type>
-	      <filelocation>a.jpg</filelocation>
+	      <filelocation>six.png</filelocation>
 	    </multimedia>
-      </content>
-      <answer id="a"><multimedia><type>Text</type><filelocation>A</filelocation></multimedia></answer>
-      <answer id="h"><multimedia><type>Text</type><filelocation>H</filelocation></multimedia></answer>
-      <answer id="y"><multimedia><type>Text</type><filelocation>Y</filelocation></multimedia></answer>
-    </question>
-    
-    <question type="multiple" correct="a" index = "100">
-      <content>
-	    <multimedia>
-	      <type>Text</type>
-	      <filelocation>Which letter is shown below?</filelocation>
+    	</answer>
+    	
+    	<answer id="1_4">
+    	<multimedia>
+	      <type>Image</type>
+	      <filelocation>one.png</filelocation>
 	    </multimedia>
 	    <multimedia>
 	      <type>Image</type>
-	      <filelocation>a.jpg</filelocation>
+	      <filelocation>four.png</filelocation>
+	    </multimedia></answer>
+	    
+    	<answer id="4_9">
+    	<multimedia>
+	      <type>Image</type>
+	      <filelocation>four.png</filelocation>
 	    </multimedia>
-      </content>
-      <answer id="a"><multimedia><type>Text</type><filelocation>A</filelocation></multimedia></answer>
-      <answer id="h"><multimedia><type>Text</type><filelocation>H</filelocation></multimedia></answer>
-      <answer id="y"><multimedia><type>Text</type><filelocation>Y</filelocation></multimedia></answer>
+	    <multimedia>
+	      <type>Image</type>
+	      <filelocation>nine.png</filelocation>
+	    </multimedia></answer>
     </question>
     
-	
+    
+    <question type="anki" correct="bye" index = "2">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>Can you sign 'goodbye'?</filelocation>
+	    </multimedia>
+      </content>
+      <answer id="bye"><multimedia><type>Image</type><filelocation>goodbye.png</filelocation></multimedia></answer>
+    </question>
+    
+    <question type="multiple" correct="circular" index = "3">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>Both 'please' and 'sorry' share what kind of motion?</filelocation>
+	    </multimedia>
+	    
+      </content>
+      <answer id="circular"><multimedia>
+	      <type>Graphic</type>
+	      <filelocation>Circle</filelocation>
+	    </multimedia></answer>
+	    
+      <answer id="rect"><multimedia>
+	      <type>Graphic</type>
+	      <filelocation>Rectangle</filelocation>
+	    </multimedia></answer>
+    </question>
+    
+    <question type="fill" index = "4">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>The person is signing _____</filelocation>
+	    </multimedia>
+	    <multimedia>
+	      <type>Video</type>
+	      <filelocation>hello.mp4</filelocation>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><type>Text</type><filelocation>Hello</filelocation></multimedia></answer>
+      <answer id="b"><multimedia><type>Text</type><filelocation>Hi</filelocation></multimedia></answer>
+      <answer id="c"><multimedia><type>Text</type>><filelocation>Hey</filelocation></multimedia></answer>
+    </question>
+    
+	<!-- 
     <question type="multiple" correct="e" index = "1">
 	  <content>
 	    <multimedia>
@@ -49,7 +104,6 @@
 	  <answer id="f"><multimedia><type>Text</type><filelocation>F</filelocation></multimedia></answer>
 	  <answer id="m"><multimedia><type>Text</type><filelocation>M</filelocation></multimedia></answer>
 	</question>
-	
 	
 	<question type="multiple" correct="t" index = "3">
 	  <content>
@@ -100,21 +154,7 @@
     </question>
     
     
-    <question type="fill" index = "101">
-      <content>
-	    <multimedia>
-	      <type>Text</type>
-	      <filelocation>The person is signing _____</filelocation>
-	    </multimedia>
-	    <multimedia>
-	      <type>Image</type>
-	      <filelocation>hello.jpg</filelocation>
-	    </multimedia>
-      </content>
-      <answer id="a"><multimedia><type>Text</type><filelocation>Hello</filelocation></multimedia></answer>
-      <answer id="b"><multimedia><type>Text</type><filelocation>Hi</filelocation></multimedia></answer>
-      <answer id="c"><multimedia><type>Text</type>><filelocation>""Howdy""</filelocation></multimedia></answer>
-    </question>
+    
 	
 	<question type="fill" index = "6">
       <content>
@@ -131,20 +171,6 @@
       <answer id="b"><multimedia><type>text</type><filelocation>can't hear</filelocation></multimedia></answer>
     </question>
 	
-	<question type="fill" index = "7">
-      <content>
-	    <multimedia>
-	      <type>Text</type>
-          <filelocation>The person is signing _____</filelocation>
-	    </multimedia>
-	    <multimedia>
-	      <image>hearing.jpg</image>
-	    </multimedia>
-      </content>
-      <answer id="a"><multimedia><type>text</type><filelocation>hear</filelocation></multimedia></answer>
-      <answer id="b"><multimedia><type>text</type><filelocation>hearing</filelocation></multimedia></answer>
-	  <answer id="c"><multimedia><type>text</type><filelocation>listening</filelocation></multimedia></answer>
-    </question>
 	
 	<question type="fill" index = "8">
       <content>
@@ -162,20 +188,7 @@
       <answer id="c"><multimedia><type>text</type><filelocation>""Howdy""</filelocation></multimedia></answer>
     </question>
 	
-	<question type="fill" index = "9">
-      <content>
-	    <multimedia>
-	      <type>Text</type>
-          <text>The person is signing _____</text>
-	    </multimedia>
-	    <multimedia>
-	      <type>Image</type>
-          <filelocation>name.jpg</filelocation>
-	    </multimedia>
-      </content>
-      <answer id="a"><multimedia><type>text</type><filelocation>name</filelocation></multimedia></answer>
-      <answer id="b"><multimedia><type>text</type><filelocation>called</filelocation></multimedia></answer>
-    </question>
+	
 	
 	<question type="fill" index = "10">
       <content>
@@ -433,7 +446,7 @@
                 <filelocation>use.mp4</filelocation>
 	    	</multimedia>
 	    </answer>
-    </question>
+    </question>-->
 
   </questions>
 </quiz>
