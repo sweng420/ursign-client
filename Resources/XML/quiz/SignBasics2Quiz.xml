@@ -1,0 +1,65 @@
+<quiz id = "1">
+  <name>Basics 2 Quiz</name>
+  <questions>
+    
+    <question type="fill" index = "1">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>The person is signing _____</filelocation>
+	    </multimedia>
+	    <multimedia>
+	      <type>Video</type>
+	      <filelocation>again.mp4</filelocation>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><type>Text</type><filelocation>Again</filelocation></multimedia></answer>
+    </question>
+    
+    <question type="fill" index = "2">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>The person is signing _____</filelocation>
+	    </multimedia>
+	    <multimedia>
+	      <type>Video</type>
+	      <filelocation>father.mp4</filelocation>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><type>Text</type><filelocation>father</filelocation></multimedia></answer>
+      <answer id="a"><multimedia><type>Text</type><filelocation>dad</filelocation></multimedia></answer>
+    </question>
+    
+    <question type="fill" index = "3">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>The person is signing _____</filelocation>
+	    </multimedia>
+	    <multimedia>
+	      <type>Video</type>
+	      <filelocation>deaf.mp4</filelocation>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><type>Text</type><filelocation>Deaf</filelocation></multimedia></answer>
+    </question>
+    
+    <question type="fill" index = "4">
+      <content>
+	    <multimedia>
+	      <type>Text</type>
+	      <filelocation>The person is signing _____</filelocation>
+	    </multimedia>
+	    <multimedia>
+	      <type>Video</type>
+	      <filelocation>me.mp4</filelocation>
+	    </multimedia>
+      </content>
+      <answer id="a"><multimedia><type>Text</type><filelocation>Me</filelocation></multimedia></answer>
+      <answer id="a"><multimedia><type>Text</type><filelocation>I</filelocation></multimedia></answer>
+      <answer id="a"><multimedia><type>Text</type><filelocation>George</filelocation></multimedia></answer>
+    </question>
+
+  </questions>
+</quiz>
