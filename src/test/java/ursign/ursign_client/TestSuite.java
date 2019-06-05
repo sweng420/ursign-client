@@ -5,6 +5,10 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
   TestFeatureXML.class,
+  TestFeatureMultimedia.class,
+  TestFeaturePage.class,
+  TestFeatureUser.class,
+  
 })
 
 public class TestSuite {
