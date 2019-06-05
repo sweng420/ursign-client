@@ -27,13 +27,12 @@ public class QuizEngine {
 	}
 	
 	public Question getCurrentQuestion() {
-		return setup.get(state);
+		return setup.get(state-1);
 	}
 	
 	public Question getNextQuestion() {
 		if(!isOnLast()){
-			state++;
-			return setup.get(state-1);
+			return setup.get(state++);
 		}
 		return setup.get(0);
 	}

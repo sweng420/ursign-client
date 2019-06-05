@@ -10,6 +10,7 @@ import AudioPlayer.AudioPlayer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -130,6 +131,14 @@ public class FXQuizController {
 	}
 	
 	
+	public void finishedQuiz() {
+		rootBorderPane.setCenter(null);
+		controlbox.getChildren().clear();
+		rootBorderPane.setBottom(controlbox);
+		
+		message.setText("Congratulations on completing the quiz.\nx");
+		u.addCredits(5);
+	}
 	
 	
 	/* showCard will show both a question part and the answer part
@@ -141,6 +150,7 @@ public class FXQuizController {
 		rootBorderPane.setBottom(controlbox);
 		
 		VBox cardBox = new VBox();
+		cardBox.setAlignment(Pos.CENTER);
 		int i = 0;
 		
 		
@@ -151,61 +161,68 @@ public class FXQuizController {
 		 * anki: show the multimedia exactly as we would on a slideshow slide
 		 */
 		if(selectedQuestion.isAnki()){
-			FlowPane slideshowDisplay = new FlowPane(Orientation.VERTICAL);
+			
 			for(Multimedia m : selectedQuestion.getContent()) {
-				System.out.println(i);
 				Pane p = FXSlideshowController.vizMultimedia(m);
 				
-				slideshowDisplay.getChildren().add(p);
-				i++;
+				cardBox.getChildren().add(p);
 			}
 			Button flipButton = new Button("Flip card");
 			flipButton.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override public void handle(ActionEvent e) {
-			    	
-			    
+			    @Override public void handle(ActionEvent e) {   			    
 			    	// get rid of the flip button
 			    	controlbox.getChildren().clear();
 			    	
+			    	FlowPane slideshowDisplay = new FlowPane(Orientation.VERTICAL);
+					for(Multimedia m : selectedQuestion.getAnswers().get(0).getMultimedias()) {
+						Pane p = FXSlideshowController.vizMultimedia(m);
+						
+						slideshowDisplay.getChildren().add(p);
+					}
+					cardBox.getChildren().add(new Separator());
+					cardBox.getChildren().add(slideshowDisplay);
+			    	
 			    	// replace with easy/hard buttons
-			    	Button hardButton = new Button("Hard question...");
+			    	Button hardButton = new Button("That was hard.");
 					Button easyButton = new Button("Easy!");
 					
 					hardButton.setOnAction(new EventHandler<ActionEvent>() {
 					    @Override public void handle(ActionEvent e) {
+					    	// hard question, so downgrade it...
+			        		qe.getCurrentQuestion().resetBox();
+			        		
 					        if(qe.isOnLast()) {
-					        	message.setText("You have finished the quiz, congratulations!");
+					        	finishedQuiz();
 					        } else {
-					        		// hard question, so downgrade it...
-					        		qe.getCurrentQuestion().incBox();
-					        		
-					        		showCard(qe.getNextQuestion());
+					        	showCard(qe.getNextQuestion());
 					        }
 					    }
 					});
 					
 					easyButton.setOnAction(new EventHandler<ActionEvent>() {
 					    @Override public void handle(ActionEvent e) {
+					    	// easy question, so upgrade it...
+			        		qe.getCurrentQuestion().incBox();
+			        		
 					        if(qe.isOnLast()) {
-					        	message.setText("You have finished the quiz, congratulations!");
+					        	//message.setText("You have finished the quiz, congratulations!");
+					        	finishedQuiz();
 					        } else {
-					        		showCard(qe.getNextQuestion());
+					        	showCard(qe.getNextQuestion());
 					        }
 					    }
 					});
 					
 					controlbox.getChildren().addAll(easyButton, hardButton);
 			    }});
-			
+				controlbox.getChildren().add(flipButton);
 		} else
 		if(selectedQuestion.isFill()) {
 			/* all cards just display their 'content' (the question part) first */
 			for(Multimedia m : selectedQuestion.getContent()) {
-				System.out.println(i);
 				Pane p = FXSlideshowController.vizMultimedia(m);
 				
 				cardBox.getChildren().add(p);
-				i++;
 			}
 			
 			//HBox for search controls  
@@ -244,12 +261,14 @@ public class FXQuizController {
 			//When the submit button is clicked
 			submit.setOnAction(e->{
 				if(selectedQuestion.checkAnswer(searchHistory.getValue().toString())){
+					qe.getCurrentQuestion().incBox();
 					if(qe.isOnLast()) {
-			        	message.setText("You have finished the quiz, congratulations!");
+			        	finishedQuiz();
 			        } else {
 			        		showCard(qe.getNextQuestion());
 			        }
 				} else {
+					qe.getCurrentQuestion().resetBox();
 					message.setText("Sorry, that's not correct. Please try again.");
 				}
 			});
@@ -287,9 +306,9 @@ public class FXQuizController {
 					/* set button action for correct answer */
 					b.setOnAction(new EventHandler<ActionEvent>() {
 					    @Override public void handle(ActionEvent e) {
+					    	qe.getCurrentQuestion().incBox();
 					        if(qe.isOnLast()) {
-					        	message.setText("You have finished the quiz, congratulations! You have earned 3 credits.");
-					        	
+					        	finishedQuiz();
 					        } else {
 					        		showCard(qe.getNextQuestion());
 					        }
@@ -298,6 +317,7 @@ public class FXQuizController {
 				} else {
 					b.setOnAction(new EventHandler<ActionEvent>() {
 					    @Override public void handle(ActionEvent e) {
+					    	qe.getCurrentQuestion().resetBox();
 					        message.setText("Sorry, that's not correct. Please try again.");
 					    }
 					});

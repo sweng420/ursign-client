@@ -98,10 +98,10 @@
 											    <TextField 
 											        GridPane.columnIndex="1" GridPane.rowIndex="3" visible="false" fx:id="realnameTextfield"/>
 											        
-											    <Label text="Age:"
+											    <Label text="Born:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-											 	<Label text="21" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="ageLabel" />
-											    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false" fx:id="ageTextfield" />
+											 	<Label text="21" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="bornLabel" />
+											    <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" visible="false" fx:id="bornTextfield" />
 											        
 											    <Label text="E-mail:"
 											        GridPane.columnIndex="0" GridPane.rowIndex="5"/>
@@ -141,9 +141,9 @@
 							                      <PropertyValueFactory property="email" />
 							                  </cellValueFactory>
 							              </TableColumn>
-							              <TableColumn text="Age" prefWidth="50">
+							              <TableColumn text="Born" prefWidth="50">
 							                  <cellValueFactory>
-							                      <PropertyValueFactory property="age" />
+							                      <PropertyValueFactory property="born" />
 							                  </cellValueFactory>
 							              </TableColumn>
 							              <TableColumn text="Edit" prefWidth="100" fx:id="editcolumn">

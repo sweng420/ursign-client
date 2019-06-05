@@ -115,8 +115,8 @@ public class FXHomePageController {
     @FXML private PasswordField passwordTextfield;
     @FXML private Label realnameLabel;
     @FXML private TextField realnameTextfield;
-    @FXML private Label ageLabel;
-    @FXML private TextField ageTextfield;
+    @FXML private Label bornLabel;
+    @FXML private TextField bornTextfield;
     @FXML private Label emailLabel;
     @FXML private TextField emailTextfield;
     @FXML private Label creditsLabel;
@@ -257,8 +257,7 @@ public class FXHomePageController {
 		if(usernameTextfield.getText().trim().length() > 0 &&
 			passwordTextfield.getText().trim().length() > 0 &&
 			realnameTextfield.getText().trim().length() > 0 &&
-			emailTextfield.getText().trim().length() > 0 &&
-			Integer.parseInt(ageTextfield.getText()) >= 5) {
+			emailTextfield.getText().trim().length() > 0) {
 				Web webObject = new Web();
 				
 				List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -266,9 +265,8 @@ public class FXHomePageController {
 				urlParameters.add(new BasicNameValuePair("password", passwordTextfield.getText().trim()));
 				urlParameters.add(new BasicNameValuePair("realname", realnameTextfield.getText().trim()));
 				urlParameters.add(new BasicNameValuePair("email", emailTextfield.getText().trim()));
-				urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(ageTextfield.getText()))));
-				System.out.println("ageTextfield: "+ ageTextfield.getText());
-				System.out.println("sends: "+ Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(ageTextfield.getText())));
+				urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(bornTextfield.getText()))));
+				System.out.println("sends: "+ Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(bornTextfield.getText())));
 				WebRequest wr;
 				
 				try {
@@ -376,8 +374,7 @@ public class FXHomePageController {
 		if(usernameTextfield.getText().trim().length() > 0 &&
 				passwordTextfield.getText().trim().length() > 0 &&
 				realnameTextfield.getText().trim().length() > 0 &&
-				emailTextfield.getText().trim().length() > 0 &&
-				Integer.parseInt(ageTextfield.getText()) >= 5) {
+				emailTextfield.getText().trim().length() > 0) {
 					Web webObject = new Web();
 					
 					List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
@@ -385,7 +382,7 @@ public class FXHomePageController {
 					urlParameters.add(new BasicNameValuePair("password", passwordTextfield.getText().trim()));
 					urlParameters.add(new BasicNameValuePair("realname", realnameTextfield.getText().trim()));
 					urlParameters.add(new BasicNameValuePair("email", emailTextfield.getText().trim()));
-					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(( ageTextfield).getText()))));
+					urlParameters.add(new BasicNameValuePair("born", Integer.toString(Calendar.getInstance().get(Calendar.YEAR)-Integer.parseInt(( bornTextfield).getText()))));
 					urlParameters.add(new BasicNameValuePair("studentid", Integer.toString(selectedStudentId)));
 					WebRequest wr;
 					
@@ -447,7 +444,8 @@ public class FXHomePageController {
 				u.setRealname(wr.getJSON().getAsJsonObject("user").get("realname").getAsString());
 				u.setEmail(wr.getJSON().getAsJsonObject("user").get("email").getAsString());
 				u.setBorn(Integer.parseInt(wr.getJSON().getAsJsonObject("user").get("born").getAsString()));
-				u.setAge(Calendar.getInstance().get(Calendar.YEAR) - u.getBorn());
+				//u.setAge(Calendar.getInstance().get(Calendar.YEAR) - u.getBorn());
+				u.setCredits(Integer.parseInt(wr.getJSON().getAsJsonObject("user").get("credits").getAsString()));
 				usernameTextfield.setText(u.getUsername());
 				usernameLabel.setText(u.getUsername());
 				passwordTextfield.setText("");
@@ -456,8 +454,8 @@ public class FXHomePageController {
 				realnameLabel.setText(u.getRealname());
 				emailTextfield.setText(u.getEmail());
 				emailLabel.setText(u.getEmail());
-				ageLabel.setText(Integer.toString(u.getAge()));
-				ageTextfield.setText(Integer.toString(u.getAge()));
+				bornLabel.setText(Integer.toString(u.getBorn()));
+				bornTextfield.setText(Integer.toString(u.getBorn()));
 				creditsLabel.setText(Integer.toString(u.getCredits()));
 
 				/*JsonElement children = wr.getJSON().get("children");

@@ -1,9 +1,15 @@
 package ursign.ursign_client;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.message.BasicNameValuePair;
+
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 
 public class User {
 	private String username;
@@ -57,8 +63,28 @@ public class User {
 		return credits;
 	}
 	
+	public void setCredits(int n) {
+		this.credits = n;
+	}
+	
 	public void addCredits(int n) {
 		this.credits += n;
+		Web webObject = new Web();
+		
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		
+		urlParameters.add(new BasicNameValuePair("ncredits", Integer.toString(credits)));
+		WebRequest wr;
+		
+		try {
+			wr = webObject.makeRequest("/updatecredits", urlParameters, getCookies());
+			if(wr.hasError()) {
+				System.out.println(wr.getError());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public String getUsername() {

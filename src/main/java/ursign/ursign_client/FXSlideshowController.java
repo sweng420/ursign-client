@@ -113,7 +113,7 @@ public class FXSlideshowController {
 	
 	public static Pane vizMultimedia(Multimedia m) {
 		switch(m.getType()) {
-		case "Image":
+		case image:
 			Pane imgPane = new Pane();
 			File imageFile = new File(Util.constructPath(MediaType.galleryImg, m.getFilelocation()));
 			Image imageElement = new Image("file:"+imageFile.getAbsolutePath());
@@ -128,7 +128,7 @@ public class FXSlideshowController {
 	         imgPane.getChildren().add(iv2);
 
 	         return imgPane;
-		case "Text":
+		case text:
 			Pane txtPane = new Pane();
 			Text textElement = new Text();
 			textElement.setText(m.getFilelocation());
@@ -137,7 +137,7 @@ public class FXSlideshowController {
 			txtPane.getChildren().add(textElement);
 
 			return txtPane;
-		case "Video":
+		case video:
 			//Root pane
 			Pane rootPane = new Pane();
 			
@@ -161,11 +161,11 @@ public class FXSlideshowController {
 			vidplayer.loadVideo(0);
 
 			return rootPane;
-		case "Audio":
+		case audio:
 			AudioPlayer audplayer = new AudioPlayer(Util.constructPath(MediaType.galleryImg, m.getFilelocation()));
 			Pane audPane = audplayer.getPane();
 			return audPane;
-		case "Graphic":
+		case graphic:
 			String shapeType = m.getFilelocation();
 			HBox gfxPane = new HBox();
 			

@@ -13,6 +13,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import ursign.ursign_client.Multimedia.MultimediaType;
+
 enum MediaType {
 	quizXML,
 	slideXML,
@@ -120,8 +122,23 @@ public final class Util {
 	                 		  }
 	                 	  }
 	                   }
+	                   
+	                   String typeString = mElement.getElementsByTagName("type").item(0).getTextContent();
+	                   MultimediaType mt = MultimediaType.text; /* init as 'text' which at worst will just display the contents */
+	                   if(typeString.toLowerCase().startsWith("image")) {
+	                	   mt = MultimediaType.image;
+	                   } else if(typeString.toLowerCase().startsWith("video")) {
+	                	   mt = MultimediaType.video;
+	                   } else if(typeString.toLowerCase().startsWith("graphic")) {
+	                	   mt = MultimediaType.graphic;
+	                   } else if(typeString.toLowerCase().startsWith("text")) {
+	                	   mt = MultimediaType.text;
+	                   } else if(typeString.toLowerCase().startsWith("audio")) {
+	                	   mt = MultimediaType.audio;
+	                   }
+	                   
 		               ret.add(new Multimedia(
-		                		  mElement.getElementsByTagName("type").item(0).getTextContent(),
+		                		  mt,
 		                		  multiText,
 		                		  styleString,
 		                		  rowInfo

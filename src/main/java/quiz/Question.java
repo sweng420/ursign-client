@@ -128,13 +128,16 @@ public class Question {
     		/* todo: change to fuzzy match */
     		System.out.println("alength="+answers.size());
     		for(Answer a : answers) {
-        		for(Multimedia m : a.getMultimedias()){
-        			if(m.getType().equals("Text") && m.getFilelocation().toLowerCase().equals(answer.toLowerCase())) {
+    				/* take the first multimedia in the answer to extract
+    				 * its 'Text' filed which should be the right answer
+    				 */
+        			Multimedia m = a.getMultimedias().get(0);
+        			if(m.getFilelocation().toLowerCase().equals(answer.toLowerCase())) {
         				return true;
         			} else {
         				System.out.println(answer.toLowerCase() +"!="+m.getFilelocation().toLowerCase());
         			}
-        		}
+        		
         	}
     		break;
     	case anki:
